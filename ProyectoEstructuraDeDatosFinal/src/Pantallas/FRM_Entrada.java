@@ -111,13 +111,14 @@ public class FRM_Entrada extends javax.swing.JFrame {
         VerificarUsuario verificarUsuario = db_Usuarios.verificarUsuario(usuario, contrasenna);
 
         if (verificarUsuario == null) {
-            JOptionPane.showMessageDialog(null,"El nombre de usuario o la contraseña son incorectos");
+            JOptionPane.showMessageDialog(null, "El nombre de usuario o la contraseña son incorectos");
 
         } else {
             FRM_AtraccionesCR frm_AtraccionesCR = new FRM_AtraccionesCR();
             this.setEnabled(false);
             frm_AtraccionesCR.setVisible(true);
             frm_AtraccionesCR.toFront();
+            this.dispose();
         }
 
 

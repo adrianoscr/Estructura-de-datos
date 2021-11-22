@@ -11,6 +11,8 @@ package Pantallas;
  */
 public class FRM_AtraccionesCR extends javax.swing.JFrame {
 
+    private boolean vamosAlLogin = true;
+
     /**
      * Creates new form FRM_AtraccionesCR
      */
@@ -127,7 +129,7 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
         FRM_AtraccionesProvincia frm_AtraccionesProvincia = new FRM_AtraccionesProvincia(provicia);
         frm_AtraccionesProvincia.setVisible(true);
         frm_AtraccionesProvincia.toFront();
-        this.dispose();
+        this.setEnabled(false);
     }//GEN-LAST:event_jBtnLimonActionPerformed
 
     private void jBtnSanJoseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSanJoseActionPerformed
@@ -137,6 +139,8 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
         FRM_AtraccionesProvincia frm_AtraccionesProvincia = new FRM_AtraccionesProvincia(provicia);
         frm_AtraccionesProvincia.setVisible(true);
         frm_AtraccionesProvincia.toFront();
+        //this.setEnabled(false);
+        vamosAlLogin = false;
         this.dispose();
 
     }//GEN-LAST:event_jBtnSanJoseActionPerformed
@@ -147,6 +151,7 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
         FRM_AtraccionesProvincia frm_AtraccionesProvincia = new FRM_AtraccionesProvincia(provicia);
         frm_AtraccionesProvincia.setVisible(true);
         frm_AtraccionesProvincia.toFront();
+        vamosAlLogin = false;
         this.dispose();
     }//GEN-LAST:event_jBtnHerediaActionPerformed
 
@@ -156,6 +161,7 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
         FRM_AtraccionesProvincia frm_AtraccionesProvincia = new FRM_AtraccionesProvincia(provicia);
         frm_AtraccionesProvincia.setVisible(true);
         frm_AtraccionesProvincia.toFront();
+        vamosAlLogin = false;
         this.dispose();
     }//GEN-LAST:event_jBtnCartagoActionPerformed
 
@@ -165,6 +171,7 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
         FRM_AtraccionesProvincia frm_AtraccionesProvincia = new FRM_AtraccionesProvincia(provicia);
         frm_AtraccionesProvincia.setVisible(true);
         frm_AtraccionesProvincia.toFront();
+        vamosAlLogin = false;
         this.dispose();
     }//GEN-LAST:event_jBtnPuntarenasActionPerformed
 
@@ -174,6 +181,7 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
         FRM_AtraccionesProvincia frm_AtraccionesProvincia = new FRM_AtraccionesProvincia(provicia);
         frm_AtraccionesProvincia.setVisible(true);
         frm_AtraccionesProvincia.toFront();
+        vamosAlLogin = false;
         this.dispose();
     }//GEN-LAST:event_jBtnAlajuelaActionPerformed
 
@@ -183,15 +191,18 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
         FRM_AtraccionesProvincia frm_AtraccionesProvincia = new FRM_AtraccionesProvincia(provicia);
         frm_AtraccionesProvincia.setVisible(true);
         frm_AtraccionesProvincia.toFront();
+        vamosAlLogin = false;
         this.dispose();
     }//GEN-LAST:event_jBtnGuanacasteActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        FRM_Entrada frm_Entrada = new FRM_Entrada();
-        frm_Entrada.setVisible(true);
-        frm_Entrada.toFront();
-        this.dispose();
+        if (vamosAlLogin) {
+            FRM_Entrada frm_Entrada = new FRM_Entrada();
+            frm_Entrada.setVisible(true);
+            frm_Entrada.toFront();
+        }
 
+        this.dispose();
     }//GEN-LAST:event_formWindowClosed
 
 

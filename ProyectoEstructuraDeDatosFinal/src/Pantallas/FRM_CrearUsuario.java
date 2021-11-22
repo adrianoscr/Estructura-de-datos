@@ -113,17 +113,17 @@ public class FRM_CrearUsuario extends javax.swing.JFrame {
         nuevoUsuario.setCorreo(correoElectronico);
         nuevoUsuario.setContrasenna(contrasenna);
 
-        if (contrasenna.compareTo(confirmarContrasenna) == 0) {
-            
+        if (contrasenna.compareTo(confirmarContrasenna) == 0 && !contrasenna.isEmpty() && !usuarioNuevo.isEmpty() && !correoElectronico.isEmpty() && !confirmarContrasenna.isEmpty()) {
+
             nuevoUsuario.setContrasenna(contrasenna);
             db_Usuarios.crearUsuario(nuevoUsuario);
             FRM_Entrada frm_Entrada = new FRM_Entrada();
             frm_Entrada.setVisible(true);
-            JOptionPane.showMessageDialog(null, "Usuario creado exitosamente");
             this.dispose();
+            JOptionPane.showMessageDialog(null, "Usuario creado exitosamente");
 
         } else {
-            JOptionPane.showMessageDialog(this, "Contraseñas no coinciden", "Error de creción de usuario ", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Contraseñas no coinciden o hay espacios en blanco", "Error de creción de usuario ", JOptionPane.ERROR_MESSAGE);
 
         }
 
@@ -131,10 +131,7 @@ public class FRM_CrearUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jBConfirmarActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        FRM_Entrada frm_Entrada = new FRM_Entrada();
-        frm_Entrada.setVisible(true);
-        frm_Entrada.toFront();
-        this.dispose();
+
     }//GEN-LAST:event_formWindowClosed
 
 

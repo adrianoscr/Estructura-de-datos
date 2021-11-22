@@ -95,7 +95,8 @@ public class FRM_AtraccionesProvincia extends javax.swing.JFrame {
         FRM_AtraccionesCR frm_Atracciones = new FRM_AtraccionesCR();
         frm_Atracciones.setVisible(true);
         frm_Atracciones.toFront();
-        this.dispose();;
+        
+        this.dispose();
     }//GEN-LAST:event_formWindowClosed
 
 
