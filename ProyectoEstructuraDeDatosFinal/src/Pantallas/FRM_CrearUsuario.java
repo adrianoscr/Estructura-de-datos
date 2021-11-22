@@ -5,6 +5,10 @@
  */
 package Pantallas;
 
+import Logica.DB_Usuarios;
+import Logica.Usuario;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ExtremeTech
@@ -29,11 +33,11 @@ public class FRM_CrearUsuario extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jPwd_ConfirmarContrasenna = new javax.swing.JPasswordField();
+        jPwd_Contrasenna = new javax.swing.JPasswordField();
         jBConfirmar = new javax.swing.JButton();
-        jTXT_ConfirmarContrasenna = new javax.swing.JTextField();
         jTXT_CorreoElectronico = new javax.swing.JTextField();
         jTXT_CrearUsuario = new javax.swing.JTextField();
-        jTXT_Contrasenna = new javax.swing.JTextField();
         jLFondoCrearUsuario = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -51,7 +55,20 @@ public class FRM_CrearUsuario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPwd_ConfirmarContrasenna.setBackground(new java.awt.Color(168, 205, 122));
+        jPwd_ConfirmarContrasenna.setBorder(null);
+        getContentPane().add(jPwd_ConfirmarContrasenna, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 370, 250, -1));
+
+        jPwd_Contrasenna.setBackground(new java.awt.Color(168, 205, 122));
+        jPwd_Contrasenna.setBorder(null);
+        getContentPane().add(jPwd_Contrasenna, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 310, 250, -1));
 
         jBConfirmar.setBackground(new java.awt.Color(255, 255, 255));
         jBConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/Botón Crear Usuario.png"))); // NOI18N
@@ -63,10 +80,6 @@ public class FRM_CrearUsuario extends javax.swing.JFrame {
         });
         getContentPane().add(jBConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 440, 150, 40));
 
-        jTXT_ConfirmarContrasenna.setBackground(new java.awt.Color(168, 205, 122));
-        jTXT_ConfirmarContrasenna.setBorder(null);
-        getContentPane().add(jTXT_ConfirmarContrasenna, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 370, 270, 30));
-
         jTXT_CorreoElectronico.setBackground(new java.awt.Color(168, 205, 122));
         jTXT_CorreoElectronico.setBorder(null);
         getContentPane().add(jTXT_CorreoElectronico, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 270, 30));
@@ -75,10 +88,7 @@ public class FRM_CrearUsuario extends javax.swing.JFrame {
         jTXT_CrearUsuario.setBorder(null);
         getContentPane().add(jTXT_CrearUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 270, 30));
 
-        jTXT_Contrasenna.setBackground(new java.awt.Color(168, 205, 122));
-        jTXT_Contrasenna.setBorder(null);
-        getContentPane().add(jTXT_Contrasenna, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 300, 270, 30));
-
+        jLFondoCrearUsuario.setBackground(new java.awt.Color(168, 205, 122));
         jLFondoCrearUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/frm_CrearUsuario.png"))); // NOI18N
         getContentPane().add(jLFondoCrearUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -7, 950, 600));
 
@@ -87,19 +97,53 @@ public class FRM_CrearUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfirmarActionPerformed
-        FRM_Entrada frm_Entrada = new FRM_Entrada();
-        this.dispose();
-        frm_Entrada.setVisible(true);
+        DB_Usuarios db_Usuarios = new DB_Usuarios();
+
+        Usuario nuevoUsuario = new Usuario();
+
+        //Atributos
+        String usuarioNuevo = jTXT_CrearUsuario.getText();
+        String correoElectronico = jTXT_CorreoElectronico.getText();
+        String contrasenna = new String(jPwd_Contrasenna.getPassword());
+        String confirmarContrasenna = new String(jPwd_ConfirmarContrasenna.getPassword());
+        //Ponerle información al usuario a pasar
+
+        nuevoUsuario.setCedulaUsuario(confirmarContrasenna);
+        nuevoUsuario.setNombreUsuario(usuarioNuevo);
+        nuevoUsuario.setCorreo(correoElectronico);
+        nuevoUsuario.setContrasenna(contrasenna);
+
+        if (contrasenna.compareTo(confirmarContrasenna) == 0) {
+            
+            nuevoUsuario.setContrasenna(contrasenna);
+            db_Usuarios.crearUsuario(nuevoUsuario);
+            FRM_Entrada frm_Entrada = new FRM_Entrada();
+            frm_Entrada.setVisible(true);
+            JOptionPane.showMessageDialog(null, "Usuario creado exitosamente");
+            this.dispose();
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Contraseñas no coinciden", "Error de creción de usuario ", JOptionPane.ERROR_MESSAGE);
+
+        }
+
+
     }//GEN-LAST:event_jBConfirmarActionPerformed
 
-  
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        FRM_Entrada frm_Entrada = new FRM_Entrada();
+        frm_Entrada.setVisible(true);
+        frm_Entrada.toFront();
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBConfirmar;
     private javax.swing.JLabel jLFondoCrearUsuario;
+    private javax.swing.JPasswordField jPwd_ConfirmarContrasenna;
+    private javax.swing.JPasswordField jPwd_Contrasenna;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTXT_ConfirmarContrasenna;
-    private javax.swing.JTextField jTXT_Contrasenna;
     private javax.swing.JTextField jTXT_CorreoElectronico;
     private javax.swing.JTextField jTXT_CrearUsuario;
     private javax.swing.JTable jTable1;

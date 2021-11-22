@@ -5,11 +5,14 @@
  */
 package Pantallas;
 
+import Logica.DB_Usuarios;
+import Logica.VerificarUsuario;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.IOException;
 import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -41,9 +44,14 @@ public class FRM_Entrada extends javax.swing.JFrame {
         jTUsuario = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         setSize(new java.awt.Dimension(950, 593));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jBEntrar.setBackground(new java.awt.Color(255, 255, 255));
@@ -84,20 +92,40 @@ public class FRM_Entrada extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCrearUsuarioActionPerformed
-       
+
         //Se abre la pantalla de crear usuario, se desabilita el login
         FRM_CrearUsuario frm_CrearUsuario = new FRM_CrearUsuario();
-        this.dispose();
         frm_CrearUsuario.setVisible(true);
         frm_CrearUsuario.toFront();
+        this.dispose();
     }//GEN-LAST:event_jBCrearUsuarioActionPerformed
 
     private void jBEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEntrarActionPerformed
-        FRM_AtraccionesCR frm_AtraccionesCR = new FRM_AtraccionesCR();
-        this.setEnabled(false);
-        
-        frm_AtraccionesCR.setVisible(true);
+        //Información ingresada
+        String usuario = jTUsuario.getText();
+        String contrasenna = new String(jPassword.getPassword());
+
+        DB_Usuarios db_Usuarios = new DB_Usuarios();
+
+        //Coprobar que pueden pasar
+        VerificarUsuario verificarUsuario = db_Usuarios.verificarUsuario(usuario, contrasenna);
+
+        if (verificarUsuario == null) {
+            JOptionPane.showMessageDialog(null,"El nombre de usuario o la contraseña son incorectos");
+
+        } else {
+            FRM_AtraccionesCR frm_AtraccionesCR = new FRM_AtraccionesCR();
+            this.setEnabled(false);
+            frm_AtraccionesCR.setVisible(true);
+            frm_AtraccionesCR.toFront();
+        }
+
+
     }//GEN-LAST:event_jBEntrarActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+
+    }//GEN-LAST:event_formWindowClosed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
