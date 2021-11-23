@@ -146,7 +146,7 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
 
         FRM_AtraccionesProvincia frm_atraccionesProvincia = new FRM_AtraccionesProvincia(provicia);
         frm_atraccionesProvincia.setLocationRelativeTo(null);
-        frm_atraccionesProvincia.show();
+        frm_atraccionesProvincia.setVisible(true);
 
 
     }//GEN-LAST:event_jBtnLimonActionPerformed
@@ -159,7 +159,7 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
 
         FRM_AtraccionesProvincia frm_AtraccionesProvincia = new FRM_AtraccionesProvincia(provicia);
         frm_AtraccionesProvincia.setLocationRelativeTo(null);
-        frm_AtraccionesProvincia.show();
+        frm_AtraccionesProvincia.setVisible(true);
 
 
     }//GEN-LAST:event_jBtnSanJoseActionPerformed
@@ -172,7 +172,7 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
 
         FRM_AtraccionesProvincia frm_AtraccionesProvincia = new FRM_AtraccionesProvincia(provicia);
         frm_AtraccionesProvincia.setLocationRelativeTo(null);
-        frm_AtraccionesProvincia.show();
+        frm_AtraccionesProvincia.setVisible(true);
 
 
     }//GEN-LAST:event_jBtnHerediaActionPerformed
@@ -185,7 +185,7 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
 
         FRM_AtraccionesProvincia frm_AtraccionesProvincia = new FRM_AtraccionesProvincia(provicia);
         frm_AtraccionesProvincia.setLocationRelativeTo(null);
-        frm_AtraccionesProvincia.show();
+        frm_AtraccionesProvincia.setVisible(true);
 
     }//GEN-LAST:event_jBtnCartagoActionPerformed
 
@@ -197,7 +197,7 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
 
         FRM_AtraccionesProvincia frm_AtraccionesProvincia = new FRM_AtraccionesProvincia(provicia);
         frm_AtraccionesProvincia.setLocationRelativeTo(null);
-        frm_AtraccionesProvincia.show();
+        frm_AtraccionesProvincia.setVisible(true);
 
 
     }//GEN-LAST:event_jBtnPuntarenasActionPerformed
@@ -210,7 +210,7 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
 
         FRM_AtraccionesProvincia frm_AtraccionesProvincia = new FRM_AtraccionesProvincia(provicia);
         frm_AtraccionesProvincia.setLocationRelativeTo(null);
-        frm_AtraccionesProvincia.show();
+        frm_AtraccionesProvincia.setVisible(true);
 
 
     }//GEN-LAST:event_jBtnAlajuelaActionPerformed
@@ -223,7 +223,7 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
 
         FRM_AtraccionesProvincia frm_AtraccionesProvincia = new FRM_AtraccionesProvincia(provicia);
         frm_AtraccionesProvincia.setLocationRelativeTo(null);
-        frm_AtraccionesProvincia.show();
+        frm_AtraccionesProvincia.setVisible(true);
 
     }//GEN-LAST:event_jBtnGuanacasteActionPerformed
 
