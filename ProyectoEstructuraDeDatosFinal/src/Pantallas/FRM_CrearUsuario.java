@@ -33,6 +33,7 @@ public class FRM_CrearUsuario extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        btn_Salir = new javax.swing.JButton();
         jPwd_ConfirmarContrasenna = new javax.swing.JPasswordField();
         jPwd_Contrasenna = new javax.swing.JPasswordField();
         jBConfirmar = new javax.swing.JButton();
@@ -54,6 +55,7 @@ public class FRM_CrearUsuario extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -62,15 +64,46 @@ public class FRM_CrearUsuario extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btn_Salir.setBackground(new java.awt.Color(107, 170, 28));
+        btn_Salir.setForeground(new java.awt.Color(107, 170, 28));
+        btn_Salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/btn_Salir.png"))); // NOI18N
+        btn_Salir.setBorder(null);
+        btn_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 100, -1, -1));
+
         jPwd_ConfirmarContrasenna.setBackground(new java.awt.Color(168, 205, 122));
+        jPwd_ConfirmarContrasenna.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jPwd_ConfirmarContrasenna.setText("confirmar contraseña");
         jPwd_ConfirmarContrasenna.setBorder(null);
+        jPwd_ConfirmarContrasenna.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPwd_ConfirmarContrasennaFocusGained(evt);
+            }
+        });
         getContentPane().add(jPwd_ConfirmarContrasenna, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 370, 250, -1));
 
         jPwd_Contrasenna.setBackground(new java.awt.Color(168, 205, 122));
+        jPwd_Contrasenna.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jPwd_Contrasenna.setText("Ingrese contraseña");
         jPwd_Contrasenna.setBorder(null);
+        jPwd_Contrasenna.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPwd_ContrasennaFocusGained(evt);
+            }
+        });
+        jPwd_Contrasenna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPwd_ContrasennaActionPerformed(evt);
+            }
+        });
         getContentPane().add(jPwd_Contrasenna, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 310, 250, -1));
 
         jBConfirmar.setBackground(new java.awt.Color(255, 255, 255));
+        jBConfirmar.setForeground(new java.awt.Color(255, 255, 255));
         jBConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/Botón Crear Usuario.png"))); // NOI18N
         jBConfirmar.setBorder(null);
         jBConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -81,11 +114,25 @@ public class FRM_CrearUsuario extends javax.swing.JFrame {
         getContentPane().add(jBConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 440, 150, 40));
 
         jTXT_CorreoElectronico.setBackground(new java.awt.Color(168, 205, 122));
+        jTXT_CorreoElectronico.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jTXT_CorreoElectronico.setText("Ingrese correo");
         jTXT_CorreoElectronico.setBorder(null);
+        jTXT_CorreoElectronico.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTXT_CorreoElectronicoFocusGained(evt);
+            }
+        });
         getContentPane().add(jTXT_CorreoElectronico, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 270, 30));
 
         jTXT_CrearUsuario.setBackground(new java.awt.Color(168, 205, 122));
+        jTXT_CrearUsuario.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jTXT_CrearUsuario.setText("Ingrese nombre usuario");
         jTXT_CrearUsuario.setBorder(null);
+        jTXT_CrearUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTXT_CrearUsuarioFocusGained(evt);
+            }
+        });
         getContentPane().add(jTXT_CrearUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 270, 30));
 
         jLFondoCrearUsuario.setBackground(new java.awt.Color(168, 205, 122));
@@ -120,7 +167,7 @@ public class FRM_CrearUsuario extends javax.swing.JFrame {
             FRM_Entrada frm_Entrada = new FRM_Entrada();
             frm_Entrada.setVisible(true);
             this.dispose();
-            JOptionPane.showMessageDialog(null, "Usuario creado exitosamente");
+            JOptionPane.showMessageDialog(this, "Usuario creado exitosamente");
 
         } else {
             JOptionPane.showMessageDialog(this, "Contraseñas no coinciden o hay espacios en blanco", "Error de creción de usuario ", JOptionPane.ERROR_MESSAGE);
@@ -134,8 +181,39 @@ public class FRM_CrearUsuario extends javax.swing.JFrame {
 
     }//GEN-LAST:event_formWindowClosed
 
+    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
+
+        //Se cierra la pantalla y se regresa a usuarios. 
+        this.dispose();
+
+        FRM_Entrada entrar = new FRM_Entrada();
+        entrar.setLocationRelativeTo(null);
+        entrar.show();
+    }//GEN-LAST:event_btn_SalirActionPerformed
+
+    private void jTXT_CrearUsuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTXT_CrearUsuarioFocusGained
+        jTXT_CrearUsuario.setText("");
+    }//GEN-LAST:event_jTXT_CrearUsuarioFocusGained
+
+    private void jTXT_CorreoElectronicoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTXT_CorreoElectronicoFocusGained
+        jTXT_CorreoElectronico.setText("");
+    }//GEN-LAST:event_jTXT_CorreoElectronicoFocusGained
+
+    private void jPwd_ContrasennaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPwd_ContrasennaActionPerformed
+  
+    }//GEN-LAST:event_jPwd_ContrasennaActionPerformed
+
+    private void jPwd_ContrasennaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPwd_ContrasennaFocusGained
+        jPwd_ConfirmarContrasenna.setText("");
+    }//GEN-LAST:event_jPwd_ContrasennaFocusGained
+
+    private void jPwd_ConfirmarContrasennaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPwd_ConfirmarContrasennaFocusGained
+        jPwd_ConfirmarContrasenna.setText("");
+    }//GEN-LAST:event_jPwd_ConfirmarContrasennaFocusGained
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_Salir;
     private javax.swing.JButton jBConfirmar;
     private javax.swing.JLabel jLFondoCrearUsuario;
     private javax.swing.JPasswordField jPwd_ConfirmarContrasenna;

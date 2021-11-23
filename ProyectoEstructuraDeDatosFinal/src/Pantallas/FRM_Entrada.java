@@ -38,6 +38,7 @@ public class FRM_Entrada extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btn_Salir = new javax.swing.JButton();
         jBEntrar = new javax.swing.JButton();
         jBCrearUsuario = new javax.swing.JButton();
         jPassword = new javax.swing.JPasswordField();
@@ -45,6 +46,7 @@ public class FRM_Entrada extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
         setSize(new java.awt.Dimension(950, 593));
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -53,6 +55,16 @@ public class FRM_Entrada extends javax.swing.JFrame {
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_Salir.setBackground(new java.awt.Color(107, 170, 28));
+        btn_Salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/btn_Salir.png"))); // NOI18N
+        btn_Salir.setBorder(null);
+        btn_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 80, -1, -1));
 
         jBEntrar.setBackground(new java.awt.Color(255, 255, 255));
         jBEntrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/Botón Entrar.png"))); // NOI18N
@@ -75,11 +87,25 @@ public class FRM_Entrada extends javax.swing.JFrame {
         getContentPane().add(jBCrearUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 480, 140, 40));
 
         jPassword.setBackground(new java.awt.Color(168, 205, 122));
+        jPassword.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jPassword.setText("Contraseña");
         jPassword.setBorder(null);
+        jPassword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPasswordFocusGained(evt);
+            }
+        });
         getContentPane().add(jPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 422, 270, 30));
 
         jTUsuario.setBackground(new java.awt.Color(168, 205, 122));
+        jTUsuario.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jTUsuario.setText("Nombre usuario");
         jTUsuario.setBorder(null);
+        jTUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTUsuarioFocusGained(evt);
+            }
+        });
         getContentPane().add(jTUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 352, 270, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/frm_entrada.png"))); // NOI18N
@@ -107,18 +133,20 @@ public class FRM_Entrada extends javax.swing.JFrame {
 
         DB_Usuarios db_Usuarios = new DB_Usuarios();
 
-        //Coprobar que pueden pasar
+        //Comprobar que pueden pasar
         VerificarUsuario verificarUsuario = db_Usuarios.verificarUsuario(usuario, contrasenna);
 
         if (verificarUsuario == null) {
             JOptionPane.showMessageDialog(null, "El nombre de usuario o la contraseña son incorectos");
 
         } else {
-            FRM_AtraccionesCR frm_AtraccionesCR = new FRM_AtraccionesCR();
-            this.setEnabled(false);
-            frm_AtraccionesCR.setVisible(true);
-            frm_AtraccionesCR.toFront();
+            
             this.dispose();
+            
+            FRM_AtraccionesCR frm_AtraccionesCR = new FRM_AtraccionesCR();
+            frm_AtraccionesCR.setLocationRelativeTo(null);
+            frm_AtraccionesCR.show();
+            
         }
 
 
@@ -128,8 +156,24 @@ public class FRM_Entrada extends javax.swing.JFrame {
 
     }//GEN-LAST:event_formWindowClosed
 
+    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
+
+        //Se cierra la pantalla y se termina el proceso. 
+        this.dispose();
+        
+    }//GEN-LAST:event_btn_SalirActionPerformed
+
+    private void jTUsuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTUsuarioFocusGained
+        jTUsuario.setText("");
+    }//GEN-LAST:event_jTUsuarioFocusGained
+
+    private void jPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordFocusGained
+        jPassword.setText("");
+    }//GEN-LAST:event_jPasswordFocusGained
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_Salir;
     private javax.swing.JButton jBCrearUsuario;
     private javax.swing.JButton jBEntrar;
     private javax.swing.JLabel jLabel1;

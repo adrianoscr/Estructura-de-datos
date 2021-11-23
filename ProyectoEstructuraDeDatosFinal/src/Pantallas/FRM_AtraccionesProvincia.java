@@ -23,34 +23,48 @@ public class FRM_AtraccionesProvincia extends javax.swing.JFrame {
 
     public FRM_AtraccionesProvincia(String provicia) {
         initComponents();
-        jLProviciaSeleccionada.setText(provicia);
+        jLProviciaSeleccionada.setText("Atracciones " + provicia);
         ImageIcon icon = null;
 
         switch (provicia) {
 
             case "Cartago":
-                jLImagenProvincia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/btn_Cartago.png")));
+                jLImagenProvincia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/Cartago.png")));
+                jLDescripcionProvicia.setText("<html> Cartago era anteriormente la capital de Costa Rica"
+                        + "<br><br> Actualmente acá se encuentra la basilica principal del país </html>");
 
                 break;
 
             case "San José":
-                jLImagenProvincia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/btn_SanJose.png")));
+                jLImagenProvincia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/San Jose.png")));
+                jLDescripcionProvicia.setText("<html> Cartago era anteriormente la capital de Costa Rica"
+                        + "<br><br> Actualmente acá se encuentra la basilica principal del país </html>");
                 break;
 
             case "Alajuela":
-                jLImagenProvincia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/btn_Alajuela.png")));
+                jLImagenProvincia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/Alajuela.png")));
+                jLDescripcionProvicia.setText("<html> Cartago era anteriormente la capital de Costa Rica"
+                        + "<br><br> Actualmente acá se encuentra la basilica principal del país </html>");
                 break;
             case "Puntarenas":
-                jLImagenProvincia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/btn_Puntarenas.png")));
+                jLImagenProvincia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/Puntarenas.png")));
+                jLDescripcionProvicia.setText("<html> Cartago era anteriormente la capital de Costa Rica"
+                        + "<br><br> Actualmente acá se encuentra la basilica principal del país </html>");
                 break;
             case "Heredia":
-                jLImagenProvincia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/btn_Heredia.png")));
+                jLImagenProvincia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/Heredia.png")));
+                jLDescripcionProvicia.setText("<html> Cartago era anteriormente la capital de Costa Rica"
+                        + "<br><br> Actualmente acá se encuentra la basilica principal del país </html>");
                 break;
             case "Limón":
-                jLImagenProvincia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/btn_Limon.png")));
+                jLImagenProvincia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/Limon.png")));
+                jLDescripcionProvicia.setText("<html> Cartago era anteriormente la capital de Costa Rica"
+                        + "<br><br> Actualmente acá se encuentra la basilica principal del país </html>");
                 break;
             case "Guanacaste":
-                jLImagenProvincia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/btn_Guanacaste.png")));
+                jLImagenProvincia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/Guanacaste.png")));
+                jLDescripcionProvicia.setText("<html> Cartago era anteriormente la capital de Costa Rica"
+                        + "<br><br> Actualmente acá se encuentra la basilica principal del país </html>");
                 break;
 
         }
@@ -66,11 +80,14 @@ public class FRM_AtraccionesProvincia extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btn_Home = new javax.swing.JButton();
         jLImagenProvincia = new javax.swing.JLabel();
+        jLDescripcionProvicia = new javax.swing.JLabel();
         jLProviciaSeleccionada = new javax.swing.JLabel();
         jLAtraccionesProvicia = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -78,7 +95,25 @@ public class FRM_AtraccionesProvincia extends javax.swing.JFrame {
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jLImagenProvincia, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 70));
+
+        btn_Home.setBackground(new java.awt.Color(107, 170, 28));
+        btn_Home.setForeground(new java.awt.Color(107, 170, 28));
+        btn_Home.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/btn_home.png"))); // NOI18N
+        btn_Home.setBorder(null);
+        btn_Home.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_HomeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_Home, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 20, -1, -1));
+        getContentPane().add(jLImagenProvincia, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 266, 170));
+
+        jLDescripcionProvicia.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jLDescripcionProvicia.setForeground(new java.awt.Color(255, 255, 255));
+        jLDescripcionProvicia.setText("Text");
+        jLDescripcionProvicia.setToolTipText("");
+        jLDescripcionProvicia.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        getContentPane().add(jLDescripcionProvicia, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 250, 290));
 
         jLProviciaSeleccionada.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLProviciaSeleccionada.setForeground(new java.awt.Color(255, 255, 255));
@@ -92,16 +127,23 @@ public class FRM_AtraccionesProvincia extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        FRM_AtraccionesCR frm_Atracciones = new FRM_AtraccionesCR();
-        frm_Atracciones.setVisible(true);
-        frm_Atracciones.toFront();
-        
-        this.dispose();
+
     }//GEN-LAST:event_formWindowClosed
+
+    private void btn_HomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HomeActionPerformed
+
+        this.dispose();
+        FRM_AtraccionesCR atraccionesCR = new FRM_AtraccionesCR();
+        atraccionesCR.setLocationRelativeTo(null);
+        atraccionesCR.show();
+
+    }//GEN-LAST:event_btn_HomeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_Home;
     private javax.swing.JLabel jLAtraccionesProvicia;
+    private javax.swing.JLabel jLDescripcionProvicia;
     private javax.swing.JLabel jLImagenProvincia;
     private javax.swing.JLabel jLProviciaSeleccionada;
     // End of variables declaration//GEN-END:variables

@@ -5,6 +5,8 @@
  */
 package Pantallas;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ExtremeTech
@@ -29,6 +31,7 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btn_Salir = new javax.swing.JButton();
         jBtnAlajuela = new javax.swing.JButton();
         jBtnPuntarenas = new javax.swing.JButton();
         jBtnGuanacaste = new javax.swing.JButton();
@@ -36,15 +39,27 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
         jBtnHeredia = new javax.swing.JButton();
         jBtnCartago = new javax.swing.JButton();
         jBtnLimon = new javax.swing.JButton();
-        jLFondoAtraccionesCR = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_Salir.setBackground(new java.awt.Color(107, 170, 28));
+        btn_Salir.setForeground(new java.awt.Color(107, 170, 28));
+        btn_Salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/btn_Salir.png"))); // NOI18N
+        btn_Salir.setBorder(null);
+        btn_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 30, -1, -1));
 
         jBtnAlajuela.setBackground(new java.awt.Color(255, 255, 255));
         jBtnAlajuela.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/btn_Alajuela.png"))); // NOI18N
@@ -54,7 +69,7 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
                 jBtnAlajuelaActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnAlajuela, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 270, 220, 130));
+        getContentPane().add(jBtnAlajuela, new org.netbeans.lib.awtextra.AbsoluteConstraints(488, 154, 208, 155));
 
         jBtnPuntarenas.setBackground(new java.awt.Color(255, 255, 255));
         jBtnPuntarenas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/Puntarenas.png"))); // NOI18N
@@ -64,7 +79,7 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
                 jBtnPuntarenasActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnPuntarenas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 220, 130));
+        getContentPane().add(jBtnPuntarenas, new org.netbeans.lib.awtextra.AbsoluteConstraints(137, 367, 208, 155));
 
         jBtnGuanacaste.setBackground(new java.awt.Color(255, 255, 255));
         jBtnGuanacaste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/btn_Guanacaste.png"))); // NOI18N
@@ -74,7 +89,7 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
                 jBtnGuanacasteActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnGuanacaste, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 440, 220, 130));
+        getContentPane().add(jBtnGuanacaste, new org.netbeans.lib.awtextra.AbsoluteConstraints(371, 367, 208, 155));
 
         jBtnSanJose.setBackground(new java.awt.Color(255, 255, 255));
         jBtnSanJose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/btn_SanJose.png"))); // NOI18N
@@ -84,7 +99,7 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
                 jBtnSanJoseActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnSanJose, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 220, 130));
+        getContentPane().add(jBtnSanJose, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 154, 208, 155));
 
         jBtnHeredia.setBackground(new java.awt.Color(255, 255, 255));
         jBtnHeredia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/btn_Heredia.png"))); // NOI18N
@@ -94,7 +109,7 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
                 jBtnHerediaActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnHeredia, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, 220, 130));
+        getContentPane().add(jBtnHeredia, new org.netbeans.lib.awtextra.AbsoluteConstraints(722, 154, 208, 155));
 
         jBtnCartago.setBackground(new java.awt.Color(255, 255, 255));
         jBtnCartago.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/Cartago.png"))); // NOI18N
@@ -104,7 +119,7 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
                 jBtnCartagoActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnCartago, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 110, 220, 130));
+        getContentPane().add(jBtnCartago, new org.netbeans.lib.awtextra.AbsoluteConstraints(254, 154, 208, 155));
 
         jBtnLimon.setBackground(new java.awt.Color(255, 255, 255));
         jBtnLimon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/btn_Limon.png"))); // NOI18N
@@ -114,99 +129,117 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
                 jBtnLimonActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnLimon, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 270, 220, 130));
+        getContentPane().add(jBtnLimon, new org.netbeans.lib.awtextra.AbsoluteConstraints(605, 367, 208, 155));
 
-        jLFondoAtraccionesCR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/frm_AtraccionesCR.png"))); // NOI18N
-        getContentPane().add(jLFondoAtraccionesCR, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/frm_AtraccionesCR.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 580));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnLimonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnLimonActionPerformed
+
         String provicia = "Limón";
 
-        FRM_AtraccionesProvincia frm_AtraccionesProvincia = new FRM_AtraccionesProvincia(provicia);
-        frm_AtraccionesProvincia.setVisible(true);
-        frm_AtraccionesProvincia.toFront();
-        this.setEnabled(false);
+        this.dispose(   );
+
+        FRM_AtraccionesProvincia frm_atraccionesProvincia = new FRM_AtraccionesProvincia(provicia);
+        frm_atraccionesProvincia.setLocationRelativeTo(null);
+        frm_atraccionesProvincia.show();
+
+
     }//GEN-LAST:event_jBtnLimonActionPerformed
 
     private void jBtnSanJoseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSanJoseActionPerformed
 
         String provicia = "San José";
 
-        FRM_AtraccionesProvincia frm_AtraccionesProvincia = new FRM_AtraccionesProvincia(provicia);
-        frm_AtraccionesProvincia.setVisible(true);
-        frm_AtraccionesProvincia.toFront();
-        //this.setEnabled(false);
-        vamosAlLogin = false;
         this.dispose();
+
+        FRM_AtraccionesProvincia frm_AtraccionesProvincia = new FRM_AtraccionesProvincia(provicia);
+        frm_AtraccionesProvincia.setLocationRelativeTo(null);
+        frm_AtraccionesProvincia.show();
+
 
     }//GEN-LAST:event_jBtnSanJoseActionPerformed
 
     private void jBtnHerediaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnHerediaActionPerformed
+
         String provicia = "Heredia";
 
-        FRM_AtraccionesProvincia frm_AtraccionesProvincia = new FRM_AtraccionesProvincia(provicia);
-        frm_AtraccionesProvincia.setVisible(true);
-        frm_AtraccionesProvincia.toFront();
-        vamosAlLogin = false;
         this.dispose();
+
+        FRM_AtraccionesProvincia frm_AtraccionesProvincia = new FRM_AtraccionesProvincia(provicia);
+        frm_AtraccionesProvincia.setLocationRelativeTo(null);
+        frm_AtraccionesProvincia.show();
+
+
     }//GEN-LAST:event_jBtnHerediaActionPerformed
 
     private void jBtnCartagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCartagoActionPerformed
+
         String provicia = "Cartago";
 
-        FRM_AtraccionesProvincia frm_AtraccionesProvincia = new FRM_AtraccionesProvincia(provicia);
-        frm_AtraccionesProvincia.setVisible(true);
-        frm_AtraccionesProvincia.toFront();
-        vamosAlLogin = false;
         this.dispose();
+
+        FRM_AtraccionesProvincia frm_AtraccionesProvincia = new FRM_AtraccionesProvincia(provicia);
+        frm_AtraccionesProvincia.setLocationRelativeTo(null);
+        frm_AtraccionesProvincia.show();
+
     }//GEN-LAST:event_jBtnCartagoActionPerformed
 
     private void jBtnPuntarenasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPuntarenasActionPerformed
+
         String provicia = "Puntarenas";
 
-        FRM_AtraccionesProvincia frm_AtraccionesProvincia = new FRM_AtraccionesProvincia(provicia);
-        frm_AtraccionesProvincia.setVisible(true);
-        frm_AtraccionesProvincia.toFront();
-        vamosAlLogin = false;
         this.dispose();
+
+        FRM_AtraccionesProvincia frm_AtraccionesProvincia = new FRM_AtraccionesProvincia(provicia);
+        frm_AtraccionesProvincia.setLocationRelativeTo(null);
+        frm_AtraccionesProvincia.show();
+
+
     }//GEN-LAST:event_jBtnPuntarenasActionPerformed
 
     private void jBtnAlajuelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlajuelaActionPerformed
+
         String provicia = "Alajuela";
 
-        FRM_AtraccionesProvincia frm_AtraccionesProvincia = new FRM_AtraccionesProvincia(provicia);
-        frm_AtraccionesProvincia.setVisible(true);
-        frm_AtraccionesProvincia.toFront();
-        vamosAlLogin = false;
         this.dispose();
+
+        FRM_AtraccionesProvincia frm_AtraccionesProvincia = new FRM_AtraccionesProvincia(provicia);
+        frm_AtraccionesProvincia.setLocationRelativeTo(null);
+        frm_AtraccionesProvincia.show();
+
+
     }//GEN-LAST:event_jBtnAlajuelaActionPerformed
 
     private void jBtnGuanacasteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGuanacasteActionPerformed
+
         String provicia = "Guanacaste";
 
-        FRM_AtraccionesProvincia frm_AtraccionesProvincia = new FRM_AtraccionesProvincia(provicia);
-        frm_AtraccionesProvincia.setVisible(true);
-        frm_AtraccionesProvincia.toFront();
-        vamosAlLogin = false;
         this.dispose();
+
+        FRM_AtraccionesProvincia frm_AtraccionesProvincia = new FRM_AtraccionesProvincia(provicia);
+        frm_AtraccionesProvincia.setLocationRelativeTo(null);
+        frm_AtraccionesProvincia.show();
+
     }//GEN-LAST:event_jBtnGuanacasteActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        if (vamosAlLogin) {
-            FRM_Entrada frm_Entrada = new FRM_Entrada();
-            frm_Entrada.setVisible(true);
-            frm_Entrada.toFront();
-        }
-
-        this.dispose();
     }//GEN-LAST:event_formWindowClosed
+
+    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
+
+        //Se cierra la pantalla y se regresa a usuarios.
+        JOptionPane.showMessageDialog(null, "Gracias por utilizar el sistema", "Despedida", JOptionPane.INFORMATION_MESSAGE);
+        this.dispose();
+    }//GEN-LAST:event_btn_SalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_Salir;
     private javax.swing.JButton jBtnAlajuela;
     private javax.swing.JButton jBtnCartago;
     private javax.swing.JButton jBtnGuanacaste;
@@ -214,6 +247,6 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
     private javax.swing.JButton jBtnLimon;
     private javax.swing.JButton jBtnPuntarenas;
     private javax.swing.JButton jBtnSanJose;
-    private javax.swing.JLabel jLFondoAtraccionesCR;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
