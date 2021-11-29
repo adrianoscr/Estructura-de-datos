@@ -5,7 +5,7 @@
  */
 package Pantallas;
 
-import javax.swing.Icon;
+import Logica.Carrito.*;
 import javax.swing.ImageIcon;
 
 /**

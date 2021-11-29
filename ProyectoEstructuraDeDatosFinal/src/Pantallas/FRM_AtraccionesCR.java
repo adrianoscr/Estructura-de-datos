@@ -5,6 +5,8 @@
  */
 package Pantallas;
 
+import Logica.Carrito.*;
+import Logica.Usuario;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,11 +16,20 @@ import javax.swing.JOptionPane;
 public class FRM_AtraccionesCR extends javax.swing.JFrame {
 
     private boolean vamosAlLogin = true;
+    private pilaReservacion reservacionesUsuario; 
 
     /**
      * Creates new form FRM_AtraccionesCR
      */
     public FRM_AtraccionesCR() {
+        
+        reservacionesUsuario = new pilaReservacion();
+        
+        reservacionesUsuario.push(new nodoReservacion(new Reservacion(1, 1, "Cristopher", 2, "22/11/2021 10:30am", 1500.00f, 3000.00f, 3390.00f)));
+        reservacionesUsuario.push(new nodoReservacion(new Reservacion(1, 2, "Cristopher", 2, "22/11/2021 10:30am", 1500.00f, 3000.00f, 3390.00f)));
+        reservacionesUsuario.push(new nodoReservacion(new Reservacion(1, 3, "Cristopher", 2, "22/11/2021 10:30am", 1500.00f, 3000.00f, 3390.00f)));
+        reservacionesUsuario.push(new nodoReservacion(new Reservacion(1, 4, "Cristopher", 2, "22/11/2021 10:30am", 1500.00f, 3000.00f, 3390.00f)));
+        
         initComponents();
     }
 
@@ -33,6 +44,7 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
 
         btn_Salir = new javax.swing.JButton();
         jBtnAlajuela = new javax.swing.JButton();
+        btn_Salir1 = new javax.swing.JButton();
         jBtnPuntarenas = new javax.swing.JButton();
         jBtnGuanacaste = new javax.swing.JButton();
         jBtnSanJose = new javax.swing.JButton();
@@ -70,6 +82,17 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jBtnAlajuela, new org.netbeans.lib.awtextra.AbsoluteConstraints(488, 154, 208, 155));
+
+        btn_Salir1.setBackground(new java.awt.Color(107, 170, 28));
+        btn_Salir1.setForeground(new java.awt.Color(107, 170, 28));
+        btn_Salir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/btn_Salir.png"))); // NOI18N
+        btn_Salir1.setBorder(null);
+        btn_Salir1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Salir1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_Salir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 30, -1, -1));
 
         jBtnPuntarenas.setBackground(new java.awt.Color(255, 255, 255));
         jBtnPuntarenas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/Puntarenas.png"))); // NOI18N
@@ -237,9 +260,20 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btn_SalirActionPerformed
 
+    private void btn_Salir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Salir1ActionPerformed
+        
+        this.dispose();
+        
+        FRM_CrearReserva crearReserva = new FRM_CrearReserva(reservacionesUsuario, new Usuario("1-1674-2545", "Cristopher", "rufo369@hotmail.es", "cris123"),"San José");
+        crearReserva.setLocationRelativeTo(null);
+        crearReserva.setVisible(true);
+        
+    }//GEN-LAST:event_btn_Salir1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Salir;
+    private javax.swing.JButton btn_Salir1;
     private javax.swing.JButton jBtnAlajuela;
     private javax.swing.JButton jBtnCartago;
     private javax.swing.JButton jBtnGuanacaste;
