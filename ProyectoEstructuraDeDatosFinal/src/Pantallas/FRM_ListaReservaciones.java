@@ -5,17 +5,28 @@
  */
 package Pantallas;
 
+import Logica.Carrito.Reservacion;
+import Logica.Carrito.nodoReservacion;
+import Logica.Carrito.pilaReservacion;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ExtremeTech
  */
 public class FRM_ListaReservaciones extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FRM_ListaReservaciones
-     */
+    private pilaReservacion miPila;
+
     public FRM_ListaReservaciones() {
         initComponents();
+    }
+
+    public FRM_ListaReservaciones(pilaReservacion miPila) {
+        initComponents();
+        this.miPila = miPila;
+
     }
 
     /**
@@ -27,57 +38,84 @@ public class FRM_ListaReservaciones extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jT_ListaReservaciones = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FRM_ListaReservaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FRM_ListaReservaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FRM_ListaReservaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FRM_ListaReservaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FRM_ListaReservaciones().setVisible(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
-    }
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jT_ListaReservaciones.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Dueño de la reserva", "Cantidad de Personas", "Fecha y Hora", "Costo por Persona", "Costo total", "Costo IVA", "id_Usuario", "id_Reserva"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jT_ListaReservaciones);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 930, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/frm_Generica.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 960, 607));
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        //Sacar los datos de la pila y mostrarlos En la tabla
+
+        nodoReservacion miReserva = null;
+        boolean finPila = false;
+
+        //Repetir el pop de la pila hasta que el devuelva nulo
+        do {
+
+            miReserva = miPila.pop();
+            
+            if(miReserva == null){
+                break;
+            }
+
+            //Creamos una varible de tipo tabla para agregar cosas.
+            DefaultTableModel modelPersona = (DefaultTableModel) jT_ListaReservaciones.getModel();
+            int id_Usuario = miReserva.getMiReservacion().getId_Usuario();
+            int id_Reserva = miReserva.getMiReservacion().getId_Reserva();
+            String nombreReservacion = miReserva.getMiReservacion().getNombreReservacion();
+            int cantidadPersonas = miReserva.getMiReservacion().getCantidadPersonas();
+            String fechaHora = miReserva.getMiReservacion().getFechaHora();
+            float costoPersona = miReserva.getMiReservacion().getCostoPersona();
+            float costoTotal = miReserva.getMiReservacion().getCostoTotal();
+            float costoImpuestos = miReserva.getMiReservacion().getCostoImpuestos();
+
+            //Agregar a la tabla los datos de la Pila
+            modelPersona.addRow(new Object[]{nombreReservacion, cantidadPersonas, fechaHora, costoPersona, costoTotal, costoImpuestos, id_Usuario, id_Reserva});
+            
+        } while (finPila == false);
+
+
+    }//GEN-LAST:event_formWindowOpened
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jT_ListaReservaciones;
     // End of variables declaration//GEN-END:variables
 }

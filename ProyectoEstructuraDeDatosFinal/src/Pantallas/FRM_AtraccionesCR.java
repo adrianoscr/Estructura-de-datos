@@ -21,17 +21,30 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
     /**
      * Creates new form FRM_AtraccionesCR
      */
+    
+    //Constructor desde el menu
     public FRM_AtraccionesCR() {
         
-        reservacionesUsuario = new pilaReservacion();
+        initComponents();
         
-        reservacionesUsuario.push(new nodoReservacion(new Reservacion(1, 1, "Cristopher", 2, "22/11/2021 10:30am", 1500.00f, 3000.00f, 3390.00f)));
-        reservacionesUsuario.push(new nodoReservacion(new Reservacion(1, 2, "Cristopher", 2, "22/11/2021 10:30am", 1500.00f, 3000.00f, 3390.00f)));
-        reservacionesUsuario.push(new nodoReservacion(new Reservacion(1, 3, "Cristopher", 2, "22/11/2021 10:30am", 1500.00f, 3000.00f, 3390.00f)));
-        reservacionesUsuario.push(new nodoReservacion(new Reservacion(1, 4, "Cristopher", 2, "22/11/2021 10:30am", 1500.00f, 3000.00f, 3390.00f)));
+        this.reservacionesUsuario = new pilaReservacion();
+//        
+//        reservacionesUsuario.push(new nodoReservacion(new Reservacion(1, 1, "Adrián", 2, "22/11/2021 10:30am", 1500.00f, 3000.00f, 3390.00f)));
+//        reservacionesUsuario.push(new nodoReservacion(new Reservacion(1, 2, "Diego", 2, "22/11/2021 10:30am", 1500.00f, 3000.00f, 3390.00f)));
+//        reservacionesUsuario.push(new nodoReservacion(new Reservacion(1, 3, "Silvia", 2, "22/11/2021 10:30am", 1500.00f, 3000.00f, 3390.00f)));
+//        reservacionesUsuario.push(new nodoReservacion(new Reservacion(1, 4, "Cristopher", 2, "22/11/2021 10:30am", 1500.00f, 3000.00f, 3390.00f)));
+        
+        
+    }
+    
+    //Constructor para conservar los datos de la pila
+    public FRM_AtraccionesCR(pilaReservacion prueba) {
         
         initComponents();
+        this.reservacionesUsuario = prueba;
+
     }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.

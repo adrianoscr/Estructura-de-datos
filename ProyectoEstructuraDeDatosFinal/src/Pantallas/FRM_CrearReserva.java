@@ -8,7 +8,6 @@ package Pantallas;
 import Logica.Carrito.*;
 import Logica.*;
 import static Pantallas.FRM_Entrada.contadorReservas;
-import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,10 +20,12 @@ public class FRM_CrearReserva extends javax.swing.JFrame {
     //Se pasa la información de la pila que guarda cada una de las reservas. 
     private pilaReservacion reservaciones;
     private Usuario Usuario;
-    private String Provincia;
+    private String provincia;
 
     public FRM_CrearReserva(pilaReservacion usuarioReservas, Usuario usuario, String provicia) {
         initComponents();
+        this.provincia = provicia;
+        this.Usuario = usuario;
         this.reservaciones = usuarioReservas;
         this.lbl_costoPersona.setText("5000");
         this.txt_nombreReservacion.setText(usuario.getNombreUsuario());
@@ -202,8 +203,8 @@ public class FRM_CrearReserva extends javax.swing.JFrame {
                 //Se cierra la pantalla y se vuelve a la pantalla de atracciones provincia. 
                 this.dispose();
 
-                
-                FRM_AtraccionesCR atraccionesCR = new FRM_AtraccionesCR();
+                //Al iniciar esta pantalla se hace con el constructor que recibe una pila para conservarla y no perder los datos de la pila
+                FRM_AtraccionesCR atraccionesCR = new FRM_AtraccionesCR(reservaciones);
 
                 atraccionesCR.setLocationRelativeTo(null);
                 atraccionesCR.setVisible(true);
@@ -216,10 +217,16 @@ public class FRM_CrearReserva extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Ya alcazó el máximo de 5 reservas permitidas por usuario", "Error creación reservacion", JOptionPane.ERROR_MESSAGE);
             this.dispose();
             
-            FRM_AtraccionesCR atraccionesCR = new FRM_AtraccionesCR();
+            //Al iniciar esta pantalla se hace con el constructor que recibe una pila para conservarla y no perder los datos de la pila
+            FRM_AtraccionesCR atraccionesCR = new FRM_AtraccionesCR(reservaciones);
 
             atraccionesCR.setLocationRelativeTo(null);
             atraccionesCR.setVisible(true);
+
+
+              //Lo puse aquí como para pruebas nada más RECORDAR QUITAR LUEGO
+//              FRM_ListaReservaciones listaReservaciones = new FRM_ListaReservaciones(reservaciones);
+//              listaReservaciones.setVisible(true);
 
         }
 

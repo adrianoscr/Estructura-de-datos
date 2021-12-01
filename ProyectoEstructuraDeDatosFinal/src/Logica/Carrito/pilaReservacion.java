@@ -19,21 +19,15 @@ public class pilaReservacion {
     //Elimina una reservación de la lista. 
     public nodoReservacion pop() {
 
+        nodoReservacion aux = top; //Guardar variable para no perderla
         if (isEmpty()) {
-
-            JOptionPane.showMessageDialog(null, "El proceso ha sido completado");
-            return top; 
-            
+            System.out.println("La pila se encuentra vacía");
         } else {
-
-            nodoReservacion aux = top;
             top = top.getAbajo();
-
             aux.setAbajo(null);
-            return aux;
 
         }
-
+        return aux;
     }
 
     //Valida si la pila esta vacía. 
