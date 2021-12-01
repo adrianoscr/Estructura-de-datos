@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
  * @author ExtremeTech
  */
 public class FRM_Entrada extends javax.swing.JFrame {
+    public static int contadorReservas = 0;
 
     private Image backgroundImage = Toolkit.getDefaultToolkit().getImage("C:\\Users\\ExtremeTech\\Desktop\\Adrián 2021\\Tercer Cuatrimestre Bachiller\\Estructura de datos\\Proyecto\\Github\\Estructura-de-datos\\ProyectoEstructuraDeDatosFinal\\src\\Contents\\frm_entrada.png");
 
@@ -145,7 +146,7 @@ public class FRM_Entrada extends javax.swing.JFrame {
             
             FRM_AtraccionesCR frm_AtraccionesCR = new FRM_AtraccionesCR();
             frm_AtraccionesCR.setLocationRelativeTo(null);
-            frm_AtraccionesCR.show();
+            frm_AtraccionesCR.setVisible(true);
             
         }
 

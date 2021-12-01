@@ -7,6 +7,7 @@ package Pantallas;
 
 import Logica.Carrito.*;
 import Logica.*;
+import static Pantallas.FRM_Entrada.contadorReservas;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
@@ -14,20 +15,20 @@ import javax.swing.JOptionPane;
  *
  * @author Cristopher M
  */
+
 public class FRM_CrearReserva extends javax.swing.JFrame {
 
     //Se pasa la información de la pila que guarda cada una de las reservas. 
-    pilaReservacion reservaciones;
-    Usuario usuario;
-    String Provincia;    
-    
-    public FRM_CrearReserva(pilaReservacion usuarioReservas, Usuario usuario, String Provincia) {
-        
-        reservaciones = usuarioReservas;
+    private pilaReservacion reservaciones;
+    private Usuario Usuario;
+    private String Provincia;
+
+    public FRM_CrearReserva(pilaReservacion usuarioReservas, Usuario usuario, String provicia) {
         initComponents();
-        lbl_costoPersona.setText("5000");
-        txt_nombreReservacion.setText(usuario.getNombreUsuario());
-        
+        this.reservaciones = usuarioReservas;
+        this.lbl_costoPersona.setText("5000");
+        this.txt_nombreReservacion.setText(usuario.getNombreUsuario());
+
     }
 
     /**
@@ -41,7 +42,7 @@ public class FRM_CrearReserva extends javax.swing.JFrame {
 
         txt_nombreReservacion = new javax.swing.JTextField();
         btn_guardar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btn_cancelar = new javax.swing.JButton();
         lbl_costoIVA = new javax.swing.JTextField();
         lbl_costoPersona = new javax.swing.JTextField();
         lbl_costoTotal = new javax.swing.JTextField();
@@ -76,16 +77,16 @@ public class FRM_CrearReserva extends javax.swing.JFrame {
         });
         getContentPane().add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 520, -1, -1));
 
-        jButton2.setBackground(new java.awt.Color(2, 154, 213));
-        jButton2.setForeground(new java.awt.Color(2, 154, 213));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/btn_Cancelar.png"))); // NOI18N
-        jButton2.setBorder(null);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn_cancelar.setBackground(new java.awt.Color(2, 154, 213));
+        btn_cancelar.setForeground(new java.awt.Color(2, 154, 213));
+        btn_cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/btn_Cancelar.png"))); // NOI18N
+        btn_cancelar.setBorder(null);
+        btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btn_cancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 520, -1, -1));
+        getContentPane().add(btn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 520, -1, -1));
 
         lbl_costoIVA.setBackground(new java.awt.Color(168, 205, 122));
         lbl_costoIVA.setForeground(new java.awt.Color(0, 0, 0));
@@ -93,6 +94,11 @@ public class FRM_CrearReserva extends javax.swing.JFrame {
         lbl_costoIVA.setBorder(null);
         lbl_costoIVA.setCaretColor(new java.awt.Color(107, 170, 28));
         lbl_costoIVA.setSelectedTextColor(new java.awt.Color(107, 170, 28));
+        lbl_costoIVA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lbl_costoIVAActionPerformed(evt);
+            }
+        });
         getContentPane().add(lbl_costoIVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 410, 170, 30));
 
         lbl_costoPersona.setBackground(new java.awt.Color(168, 205, 122));
@@ -128,7 +134,7 @@ public class FRM_CrearReserva extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_nombreReservacionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_nombreReservacionFocusGained
-        
+
         txt_nombreReservacion.setText("");
 
     }//GEN-LAST:event_txt_nombreReservacionFocusGained
@@ -147,63 +153,87 @@ public class FRM_CrearReserva extends javax.swing.JFrame {
 
     }//GEN-LAST:event_sp_cantidadPersonasStateChanged
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
+    private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
+
         this.dispose();
-        
+
         FRM_AtraccionesCR atraccionesCR = new FRM_AtraccionesCR();
-        
+
         atraccionesCR.setLocationRelativeTo(null);
         atraccionesCR.setVisible(true);
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btn_cancelarActionPerformed
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
 
-        //variables necesarias para la conversion de fecha a string. 
-        //SimpleDateFormat sdf = new SimpleDateFormat("dd/yyyy"); 
-        
-        //Se guarda la informacióin de la reserva. 
-        int id_Usuario = 1;
-        int id_Reserva = 1;
-        String nombreReservacion = txt_nombreReservacion.getText();
-        int cantidadPersonas = (Integer) sp_cantidadPersonas.getValue();
-        String fechaHora = sp_fechaHora.getValue().toString();
-        Float costoPersona = Float.parseFloat(lbl_costoPersona.getText());
-        Float costoTotal = Float.parseFloat(lbl_costoTotal.getText());
-        Float costoImpuestos = Float.parseFloat(lbl_costoIVA.getText());
+        if (contadorReservas < 5) {
 
-        //Se valida que los datos más importantes sean creados. 
-        if (cantidadPersonas <= 0 || nombreReservacion.isEmpty()) {
-            
-            JOptionPane.showMessageDialog(this, "Por favor complete toda la información requerida para poder continuar", "Error creación reservacion", JOptionPane.ERROR_MESSAGE);
-            
+            //Incrementar contador para la pila 
+            contadorReservas++;
+
+            //variables necesarias para la conversion de fecha a string. 
+            //SimpleDateFormat sdf = new SimpleDateFormat("dd/yyyy"); 
+            //Se guarda la informacióin de la reserva.
+            int id_Usuario = 1;
+            int id_Reserva = 1;
+            String nombreReservacion = txt_nombreReservacion.getText();
+            int cantidadPersonas = (Integer) sp_cantidadPersonas.getValue();
+            String fechaHora = sp_fechaHora.getValue().toString();
+            Float costoPersona = Float.parseFloat(lbl_costoPersona.getText());
+            Float costoTotal = Float.parseFloat(lbl_costoTotal.getText());
+            Float costoImpuestos = Float.parseFloat(lbl_costoIVA.getText());
+
+            //Se valida que los datos más importantes sean creados. 
+            if (cantidadPersonas <= 0 || nombreReservacion.isEmpty()) {
+
+                JOptionPane.showMessageDialog(this, "Por favor complete toda la información requerida para poder continuar", "Error creación reservacion", JOptionPane.ERROR_MESSAGE);
+
+            } else {
+
+                //Se crea una nueva reservación
+                Reservacion miReservacion = new Reservacion(id_Usuario, id_Reserva, nombreReservacion, cantidadPersonas, fechaHora, costoPersona, costoTotal, costoImpuestos);
+
+                //Se guarda la reservación en la pila
+                reservaciones.push(new nodoReservacion(miReservacion));
+
+                //Se le comunica al usuario que culmino la operación. 
+                JOptionPane.showMessageDialog(null, "La reservación se ha guardado en su carrito", "Reservación Exitosa", JOptionPane.INFORMATION_MESSAGE);
+
+                //Se cierra la pantalla y se vuelve a la pantalla de atracciones provincia. 
+                this.dispose();
+
+                
+                FRM_AtraccionesCR atraccionesCR = new FRM_AtraccionesCR();
+
+                atraccionesCR.setLocationRelativeTo(null);
+                atraccionesCR.setVisible(true);
+
+                
+            }
+
         } else {
-
-            //Se crea una nueva reservación
-            Reservacion miReservacion = new Reservacion(id_Usuario, id_Reserva, nombreReservacion, cantidadPersonas, fechaHora, costoPersona, costoTotal, costoImpuestos);
-
-            //Se guarda la reservación en la pila
-            reservaciones.push(new nodoReservacion(miReservacion));
-
-            //Se le comunica al usuario que culmino la operación. 
-            JOptionPane.showMessageDialog(null, "La reservación se ha guardado en su carrito", "Reservación Exitosa", JOptionPane.WARNING_MESSAGE);
-
-            //Se cierra la pantalla y se vuelve a la pantalla de atracciones provincia. 
+            //Mendaje para alertar de que la pila de reservas esta completada.
+            JOptionPane.showMessageDialog(this, "Ya alcazó el máximo de 5 reservas permitidas por usuario", "Error creación reservacion", JOptionPane.ERROR_MESSAGE);
             this.dispose();
-            FRM_AtraccionesProvincia atraccionesProvincia = new FRM_AtraccionesProvincia(Provincia);
-            atraccionesProvincia.setLocationRelativeTo(null);
-            atraccionesProvincia.setVisible(true);
             
+            FRM_AtraccionesCR atraccionesCR = new FRM_AtraccionesCR();
+
+            atraccionesCR.setLocationRelativeTo(null);
+            atraccionesCR.setVisible(true);
+
         }
-        
+
 
     }//GEN-LAST:event_btn_guardarActionPerformed
 
+    private void lbl_costoIVAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lbl_costoIVAActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lbl_costoIVAActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Lbl_Background;
+    private javax.swing.JButton btn_cancelar;
     private javax.swing.JButton btn_guardar;
-    private javax.swing.JButton jButton2;
     private javax.swing.JTextField lbl_costoIVA;
     private javax.swing.JTextField lbl_costoPersona;
     private javax.swing.JTextField lbl_costoTotal;
