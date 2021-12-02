@@ -134,7 +134,7 @@ public class FRM_Entrada extends javax.swing.JFrame {
         DB_Usuarios db_Usuarios = new DB_Usuarios();
 
         //Comprobar que pueden pasar
-        VerificarUsuario verificarUsuario = db_Usuarios.verificarUsuario("admin", "admin");
+        VerificarUsuario verificarUsuario = db_Usuarios.verificarUsuario(usuario, contrasenna);
 
         if (verificarUsuario == null) {
             JOptionPane.showMessageDialog(null, "El nombre de usuario o la contraseña son incorectos");
