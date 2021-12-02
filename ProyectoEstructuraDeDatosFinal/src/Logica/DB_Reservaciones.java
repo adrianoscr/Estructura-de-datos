@@ -1,5 +1,6 @@
 package Logica;
 
+import Logica.Carrito.Reservacion;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,20 +9,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 public class DB_Reservaciones {
-    
+
     public Connection connectionR;
 
     public DB_Reservaciones() {
-        
+
         // Registrar el driver de Mariadb/MySQL.
         try {
             Class.forName("org.mariadb.jdbc.Driver").getDeclaredConstructor().newInstance();
         } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
         }
     }
-    
+
     private void desconectarDB() {
 
         try {
@@ -40,32 +42,43 @@ public class DB_Reservaciones {
         } catch (SQLException ex) {
         }
     }
-    
-     public void crearReservacion(nodoColaAnteriores reservacion) {
+
+    public void crearReservacion(colaReservacionesAnteriores reservacion) {
 
         this.conectarDB();
-//        // Preparar la instrucción SQL.
-//        String miInsertar = "INSERT INTO Usuarios (CedulaUsuario, NombreUsuario, Correo, Contrasenna) VALUE(\""
-//                + usuario.getCedulaUsuario() + "\", \""
-//                + usuario.getNombreUsuario() + "\", \""
-//                + usuario.getCorreo() + "\", \""
-//                + usuario.getContrasenna() + "\");";
-//        
-//        // Mandar a ejecutar la instrucción al servidor.
-//
-//        try {
-//            PreparedStatement pstmt = this.connectionR.prepareStatement(miInsertar);
-//
-//            pstmt.execute();
-//
-//        } catch (SQLException ex) {
-//            System.out.println("Verifique que su cédula y correo electrónico sean únicos.");
-//
-//        }
+
+        Reservacion miReservacion = reservacion.atiende().getMiReservacion();
+
+        int contadorUsuario = 0;
+        int contadorReserva = 0;
+        
+        while (miReservacion != null) {
+            // Preparar la instrucción SQL.
+            String miInsertar = "INSERT INTO Reservaciones (DuennoReservacion, CantidadPersonas, FechaHora, CostoPersona, CostoTotal, CostoIVA, id_Usuario, id_Reseva) VALUE(\""
+                    + miReservacion.getNombreReservacion() + "\", \""
+                    + miReservacion.getCantidadPersonas() + "\", \""
+                    + miReservacion.getFechaHora() + "\", \""
+                    + miReservacion.getCostoPersona() + "\", \""
+                    + miReservacion.getCostoTotal() + "\", \""
+                    + miReservacion.getCostoImpuestos() + "\", \""
+                    + contadorUsuario++ + "\", \""
+                    + contadorReserva++ + "\");";
+
+            // Mandar a ejecutar la instrucción al servidor.
+            try {
+                PreparedStatement pstmt = this.connectionR.prepareStatement(miInsertar);
+
+                pstmt.execute();
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error de base de datos, el id del usuario o el id de la reserva ya existen en el sistema");
+
+            }
+            //leer el siguiente
+            miReservacion = reservacion.atiende().getMiReservacion();
+        }
 
         this.desconectarDB();
     }
-    
-    
-    
+
 }

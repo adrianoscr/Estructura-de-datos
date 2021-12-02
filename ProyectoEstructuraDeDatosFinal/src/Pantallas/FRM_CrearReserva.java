@@ -225,8 +225,8 @@ public class FRM_CrearReserva extends javax.swing.JFrame {
 
 
               //Lo puse aquí como para pruebas nada más RECORDAR QUITAR LUEGO
-//              FRM_ListaReservaciones listaReservaciones = new FRM_ListaReservaciones(reservaciones);
-//              listaReservaciones.setVisible(true);
+              //FRM_ListaReservaciones listaReservaciones = new FRM_ListaReservaciones(reservaciones);
+              //listaReservaciones.setVisible(true);
 
         }
 

@@ -8,8 +8,11 @@ package Pantallas;
 import Logica.Carrito.Reservacion;
 import Logica.Carrito.nodoReservacion;
 import Logica.Carrito.pilaReservacion;
+import Logica.DB_Reservaciones;
+import Logica.colaReservacionesAnteriores;
 import Logica.nodoColaAnteriores;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
 public class FRM_ListaReservaciones extends javax.swing.JFrame {
 
     private pilaReservacion miPila;
+    colaReservacionesAnteriores colaReservaciones = new colaReservacionesAnteriores();
 
     public FRM_ListaReservaciones() {
         initComponents();
@@ -27,10 +31,7 @@ public class FRM_ListaReservaciones extends javax.swing.JFrame {
     public FRM_ListaReservaciones(pilaReservacion miPila) {
         initComponents();
         this.miPila = miPila;
-
     }
-    
-    //-------------------------METODOS PARA METER LOS DATOS EN LA COLA------------------------------//
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -82,19 +83,16 @@ public class FRM_ListaReservaciones extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
+
         //Crear nodos de la pila y de la cola en null al comienzo
         nodoReservacion miReserva = null;
-        nodoColaAnteriores colaReservas = null;
-        
-        //Booleano que se encarga de repetir el ciclo while.
-        boolean finPila = false;
 
         //Repetir el pop de la pila hasta que el devuelva nulo
-        do {
-
+        for (;;) {
+            //Meter miReserva lo que se guardó en la pila
             miReserva = miPila.pop();
 
+            //Meter en colaReservas lo que se guardó en la cola
             if (miReserva == null) {
                 break;
             }
@@ -111,10 +109,22 @@ public class FRM_ListaReservaciones extends javax.swing.JFrame {
             float costoTotal = miReserva.getMiReservacion().getCostoTotal();
             float costoImpuestos = miReserva.getMiReservacion().getCostoImpuestos();
 
+            //Guardar en la cola todos los datos de la pila.
+            colaReservaciones.enCola(new nodoColaAnteriores(new Reservacion(id_Usuario, id_Reserva, nombreReservacion, cantidadPersonas, fechaHora, costoPersona, costoTotal, costoImpuestos)));
+
             //Agregar a la tabla los datos de la Pila
             modelPersona.addRow(new Object[]{nombreReservacion, cantidadPersonas, fechaHora, costoPersona, costoTotal, costoImpuestos, id_Usuario, id_Reserva});
 
-        } while (finPila == false);
+        }
+
+        //Llamar al metodo que está en la base de datos para guardar las reservaciones hechas
+        //Si la cola vienen vacía es porque no hay ninguna reserva actualmente, por lo que no se manda a guardar nada.
+        if (colaReservaciones != null) {
+            DB_Reservaciones db_Reservaciones = new DB_Reservaciones();
+            db_Reservaciones.crearReservacion(colaReservaciones);
+        } else {
+            JOptionPane.showMessageDialog(null, "No hay datos en la cola para mandar a guardar a la base de datos");
+        }
 
 
     }//GEN-LAST:event_formWindowOpened
