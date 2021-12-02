@@ -8,8 +8,8 @@ public class nodoColaAnteriores {
     private nodoColaAnteriores atras;
     private Reservacion miReservacion;
 
-    public nodoColaAnteriores(nodoColaAnteriores atras, Reservacion miReservacion) {
-        this.atras = atras;
+    public nodoColaAnteriores(Reservacion miReservacion) {
+
         this.miReservacion = miReservacion;
     }
 

@@ -8,6 +8,7 @@ package Pantallas;
 import Logica.Carrito.Reservacion;
 import Logica.Carrito.nodoReservacion;
 import Logica.Carrito.pilaReservacion;
+import Logica.nodoColaAnteriores;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,6 +29,8 @@ public class FRM_ListaReservaciones extends javax.swing.JFrame {
         this.miPila = miPila;
 
     }
+    
+    //-------------------------METODOS PARA METER LOS DATOS EN LA COLA------------------------------//
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -79,19 +82,23 @@ public class FRM_ListaReservaciones extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        //Sacar los datos de la pila y mostrarlos En la tabla
-
+        
+        //Crear nodos de la pila y de la cola en null al comienzo
         nodoReservacion miReserva = null;
+        nodoColaAnteriores colaReservas = null;
+        
+        //Booleano que se encarga de repetir el ciclo while.
         boolean finPila = false;
 
         //Repetir el pop de la pila hasta que el devuelva nulo
         do {
 
             miReserva = miPila.pop();
-            
-            if(miReserva == null){
+
+            if (miReserva == null) {
                 break;
             }
+            //Sacar los datos de la pila y mostrarlos En la tabla
 
             //Creamos una varible de tipo tabla para agregar cosas.
             DefaultTableModel modelPersona = (DefaultTableModel) jT_ListaReservaciones.getModel();
@@ -106,7 +113,7 @@ public class FRM_ListaReservaciones extends javax.swing.JFrame {
 
             //Agregar a la tabla los datos de la Pila
             modelPersona.addRow(new Object[]{nombreReservacion, cantidadPersonas, fechaHora, costoPersona, costoTotal, costoImpuestos, id_Usuario, id_Reserva});
-            
+
         } while (finPila == false);
 
 
