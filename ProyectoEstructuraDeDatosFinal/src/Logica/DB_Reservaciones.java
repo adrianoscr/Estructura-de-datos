@@ -49,9 +49,6 @@ public class DB_Reservaciones {
 
         Reservacion miReservacion = reservacion.atiende().getMiReservacion();
 
-        int contadorUsuario = 0;
-        int contadorReserva = 0;
-        
         while (miReservacion != null) {
             // Preparar la instrucción SQL.
             String miInsertar = "INSERT INTO Reservaciones (DuennoReservacion, CantidadPersonas, FechaHora, CostoPersona, CostoTotal, CostoIVA, id_Usuario, id_Reseva) VALUE(\""
@@ -61,8 +58,8 @@ public class DB_Reservaciones {
                     + miReservacion.getCostoPersona() + "\", \""
                     + miReservacion.getCostoTotal() + "\", \""
                     + miReservacion.getCostoImpuestos() + "\", \""
-                    + contadorUsuario++ + "\", \""
-                    + contadorReserva++ + "\");";
+                    + miReservacion.getId_Usuario() + "\", \""
+                    + miReservacion.getId_Reserva() + "\");";
 
             // Mandar a ejecutar la instrucción al servidor.
             try {
