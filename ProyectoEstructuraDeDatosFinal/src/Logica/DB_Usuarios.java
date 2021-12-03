@@ -8,8 +8,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class DB_Usuarios {
+    private Connection connect = null;
+    private Statement statement = null;
+    private PreparedStatement preparedStatement = null;
+    private ResultSet resultSet = null;
 
     public Connection connection;
 
@@ -36,7 +41,7 @@ public class DB_Usuarios {
     private void conectarDB() {
         // Abrir la conexión.
         try {
-            connection = (Connection) DriverManager.getConnection("jdbc:mariadb://139.177.205.149:3306/TURISMO", "proyectoclienteservidor", "centro1");
+            connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/atracciones_turisticas", "root", "");
         } catch (SQLException ex) {
         }
     }
@@ -95,9 +100,33 @@ public class DB_Usuarios {
             System.out.println("Error al consultar el usuario.");
 
         }
-
+        this.desconectarDB();
        return null;
 
     }
+    
+    public String readDataBase(String stmt){
+        this.conectarDB();
 
+        String consultar = ""+stmt+"";
+        String provincia = null;
+        try {
+            PreparedStatement pstmt = this.connection.prepareStatement(consultar);
+
+            ResultSet rs = pstmt.executeQuery(consultar);
+
+            if (rs.next() == true) {
+                 provincia = rs.getString("provincia");
+            } else {
+                 System.out.println("error al consultar la provincia");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al consultar el usuario.");
+
+        }
+        this.desconectarDB();
+        
+        return provincia;
+    }
+   
 }
