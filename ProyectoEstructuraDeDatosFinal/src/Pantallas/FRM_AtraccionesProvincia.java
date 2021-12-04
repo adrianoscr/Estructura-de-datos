@@ -3,7 +3,9 @@ package Pantallas;
 import Logica.DB_Usuarios;
 import Logica.DB_Atracciones;
 import Logica.DatosAtracciones;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -73,7 +75,7 @@ public class FRM_AtraccionesProvincia extends javax.swing.JFrame {
 
         DB_Atracciones db_atracciones = new DB_Atracciones();
         datosAtracciones = db_atracciones.extraerDatosAtracciones();
-        
+
         mostrar_datos_en_tabla(datosAtracciones);
 
     }
@@ -171,7 +173,7 @@ public class FRM_AtraccionesProvincia extends javax.swing.JFrame {
     public void mostrar_datos_en_tabla(ArrayList<DatosAtracciones> datosAtraccion) {
 
         if (datosAtraccion != null) {
-            
+
             DefaultTableModel tablaAtracciones = (DefaultTableModel) tablaAtraciones.getModel();
             for (DatosAtracciones i : datosAtraccion) {
                 String Provincia = i.getProvincia();
@@ -180,7 +182,7 @@ public class FRM_AtraccionesProvincia extends javax.swing.JFrame {
 
                 //Insertar info en tabla
                 if (Provincia.equalsIgnoreCase(provincia)) {
-                    tablaAtracciones.addRow(new Object[]{nombreProvincia, precio});
+                    tablaAtracciones.addRow(new Object[]{nombreProvincia, NumberFormat.getCurrencyInstance(new Locale("es", "CR")).format(precio)});
                 }
 
             }
@@ -200,7 +202,5 @@ public class FRM_AtraccionesProvincia extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaAtraciones;
     // End of variables declaration//GEN-END:variables
-
-    
 
 }
