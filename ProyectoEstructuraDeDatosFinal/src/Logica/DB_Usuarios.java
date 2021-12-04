@@ -10,6 +10,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class DB_Usuarios {
+<<<<<<< Updated upstream
+=======
+    private Connection connect = null;
+    private Statement statement = null;
+    private PreparedStatement preparedStatement = null;
+    private ResultSet resultSet = null;
+    
+>>>>>>> Stashed changes
 
     public Connection connection;
 
@@ -100,4 +108,25 @@ public class DB_Usuarios {
 
     }
 
+<<<<<<< Updated upstream
+=======
+            ResultSet rs = pstmt.executeQuery(consultar);
+
+            if (rs.next() == true) {
+                 provincia = rs.getString("provincia");
+            } else {
+                 System.out.println("error al consultar la provincia");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al consultar el usuario.");
+
+        }
+        this.desconectarDB();
+        
+        return provincia;
+    }
+    
+    
+   
+>>>>>>> Stashed changes
 }

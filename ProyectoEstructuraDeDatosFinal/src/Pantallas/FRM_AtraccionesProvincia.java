@@ -1,18 +1,33 @@
+<<<<<<< Updated upstream
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+=======
+>>>>>>> Stashed changes
 package Pantallas;
 
 import Logica.Carrito.*;
 import javax.swing.ImageIcon;
+<<<<<<< Updated upstream
+=======
+import Logica.DB_Usuarios;
+import Logica.ListaCD;
+import Logica.DB_Reservaciones;
+import Logica.DB_atracciones;
+import Logica.DatosAtracciones;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+>>>>>>> Stashed changes
 
 /**
  *
  * @author ExtremeTech
  */
 public class FRM_AtraccionesProvincia extends javax.swing.JFrame {
+<<<<<<< Updated upstream
 
     /**
      * Creates new form FRM_AtraccionesProvincia
@@ -66,9 +81,35 @@ public class FRM_AtraccionesProvincia extends javax.swing.JFrame {
                 jLDescripcionProvicia.setText("<html> Cartago era anteriormente la capital de Costa Rica"
                         + "<br><br> Actualmente acá se encuentra la basilica principal del país </html>");
                 break;
+=======
+    
+    private String provincia;
+    
+    
+    public FRM_AtraccionesProvincia() {
+        initComponents();
 
-        }
+    }
 
+    public FRM_AtraccionesProvincia(String provincia) {
+        initComponents();
+        this.provincia=provincia;
+        ArrayList<DatosAtracciones> datosAtracciones= new ArrayList <>();
+        
+>>>>>>> Stashed changes
+
+        DB_atracciones nuevaConsulta = new DB_atracciones();
+        nuevaConsulta.informacion_provincia(provincia);
+
+        jLProviciaSeleccionada.setText("Atracciones " + nuevaConsulta.nombre_provincia);
+        jLImagenProvincia.setIcon(new javax.swing.ImageIcon(getClass().getResource("" + nuevaConsulta.img + "")));
+        jLDescripcionProvicia.setText("" + nuevaConsulta.info_provincia + "");
+
+        
+        DB_atracciones db_atracciones = new DB_atracciones();
+        datosAtracciones = db_atracciones.extrarDatosAtracciones();
+        mostrar_datos_en_tabla(datosAtracciones);
+       
     }
 
     /**
@@ -96,6 +137,29 @@ public class FRM_AtraccionesProvincia extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+<<<<<<< Updated upstream
+=======
+        tablaAtraciones.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Atracción", "Precio"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tablaAtraciones);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 660, 500));
+
+>>>>>>> Stashed changes
         btn_Home.setBackground(new java.awt.Color(107, 170, 28));
         btn_Home.setForeground(new java.awt.Color(107, 170, 28));
         btn_Home.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/btn_home.png"))); // NOI18N
@@ -147,4 +211,39 @@ public class FRM_AtraccionesProvincia extends javax.swing.JFrame {
     private javax.swing.JLabel jLImagenProvincia;
     private javax.swing.JLabel jLProviciaSeleccionada;
     // End of variables declaration//GEN-END:variables
+<<<<<<< Updated upstream
+=======
+
+    public String consultaInfo(String provincia) {
+        DB_Usuarios nuevaConsulta = new DB_Usuarios();
+        String stmt = nuevaConsulta.readDataBase("select * from atracciones where provincia = " + provincia + "");
+
+        return stmt;
+    }
+
+    public void mostrar_datos_en_tabla(ArrayList<DatosAtracciones> datosAtraccion) {
+
+        if (datosAtraccion != null) {
+            DefaultTableModel tablaAtracciones = (DefaultTableModel) tablaAtraciones.getModel();
+            for (DatosAtracciones i : datosAtraccion) {
+                String Provincia = i.getProvincia();
+                String nombreProvincia = i.getAtraccion();
+                Double precio = i.getPrecio();
+
+                //Insertar info en tabla
+                if(i.getProvincia().equalsIgnoreCase(provincia)){
+                    
+                     tablaAtracciones.addRow(new Object[]{nombreProvincia, precio});
+                    
+                }
+               
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encuentra en el sistema los datos");
+        }
+
+    }
+
+>>>>>>> Stashed changes
 }
