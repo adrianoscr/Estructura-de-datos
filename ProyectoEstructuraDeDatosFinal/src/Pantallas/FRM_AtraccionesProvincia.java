@@ -1,32 +1,34 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Pantallas;
 
-import Logica.Carrito.*;
+import Logica.DB_Usuarios;
+import Logica.DB_Atracciones;
+import Logica.DatosAtracciones;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author ExtremeTech
- */
 public class FRM_AtraccionesProvincia extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FRM_AtraccionesProvincia
-     */
+    private String provincia;
+
     public FRM_AtraccionesProvincia() {
         initComponents();
+
     }
 
-    public FRM_AtraccionesProvincia(String provicia) {
+    public FRM_AtraccionesProvincia(String provincia) {
         initComponents();
-        jLProviciaSeleccionada.setText("Atracciones " + provicia);
+
+        this.provincia = provincia;
+
+        ArrayList<DatosAtracciones> datosAtracciones = new ArrayList<>();
+
+        jLProviciaSeleccionada.setText("Atracciones " + provincia);
+
         ImageIcon icon = null;
 
-        switch (provicia) {
+        switch (provincia) {
 
             case "Cartago":
                 jLImagenProvincia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/Cartago.png")));
@@ -69,6 +71,11 @@ public class FRM_AtraccionesProvincia extends javax.swing.JFrame {
 
         }
 
+        DB_Atracciones db_atracciones = new DB_Atracciones();
+        datosAtracciones = db_atracciones.extraerDatosAtracciones();
+        
+        mostrar_datos_en_tabla(datosAtracciones);
+
     }
 
     /**
@@ -80,6 +87,8 @@ public class FRM_AtraccionesProvincia extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaAtraciones = new javax.swing.JTable();
         btn_Home = new javax.swing.JButton();
         jLImagenProvincia = new javax.swing.JLabel();
         jLDescripcionProvicia = new javax.swing.JLabel();
@@ -96,6 +105,26 @@ public class FRM_AtraccionesProvincia extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tablaAtraciones.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Atracción", "Precio"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tablaAtraciones);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 660, 500));
+
         btn_Home.setBackground(new java.awt.Color(107, 170, 28));
         btn_Home.setForeground(new java.awt.Color(107, 170, 28));
         btn_Home.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/btn_home.png"))); // NOI18N
@@ -106,21 +135,21 @@ public class FRM_AtraccionesProvincia extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_Home, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 20, -1, -1));
-        getContentPane().add(jLImagenProvincia, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 266, 170));
+        getContentPane().add(jLImagenProvincia, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 220, 110));
 
         jLDescripcionProvicia.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLDescripcionProvicia.setForeground(new java.awt.Color(255, 255, 255));
         jLDescripcionProvicia.setText("Text");
         jLDescripcionProvicia.setToolTipText("");
         jLDescripcionProvicia.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        getContentPane().add(jLDescripcionProvicia, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 250, 290));
+        getContentPane().add(jLDescripcionProvicia, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 240, 300));
 
         jLProviciaSeleccionada.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLProviciaSeleccionada.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(jLProviciaSeleccionada, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 570, 40));
 
         jLAtraccionesProvicia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/frm_AtraccionesProvincia.png"))); // NOI18N
-        getContentPane().add(jLAtraccionesProvicia, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(jLAtraccionesProvicia, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -139,6 +168,28 @@ public class FRM_AtraccionesProvincia extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btn_HomeActionPerformed
 
+    public void mostrar_datos_en_tabla(ArrayList<DatosAtracciones> datosAtraccion) {
+
+        if (datosAtraccion != null) {
+            
+            DefaultTableModel tablaAtracciones = (DefaultTableModel) tablaAtraciones.getModel();
+            for (DatosAtracciones i : datosAtraccion) {
+                String Provincia = i.getProvincia();
+                String nombreProvincia = i.getAtraccion();
+                Double precio = i.getPrecio();
+
+                //Insertar info en tabla
+                if (Provincia.equalsIgnoreCase(provincia)) {
+                    tablaAtracciones.addRow(new Object[]{nombreProvincia, precio});
+                }
+
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encuentra en el sistema los datos");
+        }
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Home;
@@ -146,5 +197,10 @@ public class FRM_AtraccionesProvincia extends javax.swing.JFrame {
     private javax.swing.JLabel jLDescripcionProvicia;
     private javax.swing.JLabel jLImagenProvincia;
     private javax.swing.JLabel jLProviciaSeleccionada;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tablaAtraciones;
     // End of variables declaration//GEN-END:variables
+
+    
+
 }
