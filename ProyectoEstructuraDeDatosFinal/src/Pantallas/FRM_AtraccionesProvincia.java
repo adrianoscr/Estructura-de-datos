@@ -3,6 +3,7 @@ package Pantallas;
 import Logica.DB_Usuarios;
 import Logica.DB_Atracciones;
 import Logica.DatosAtracciones;
+import Logica.ListaCD;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -24,7 +25,7 @@ public class FRM_AtraccionesProvincia extends javax.swing.JFrame {
 
         this.provincia = provincia;
 
-        ArrayList<DatosAtracciones> datosAtracciones = new ArrayList<>();
+        ListaCD datosAtracciones = new ListaCD();
 
         jLProviciaSeleccionada.setText("Atracciones " + provincia);
 
@@ -123,6 +124,11 @@ public class FRM_AtraccionesProvincia extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tablaAtraciones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaAtracionesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaAtraciones);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 660, 500));
@@ -170,22 +176,25 @@ public class FRM_AtraccionesProvincia extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btn_HomeActionPerformed
 
-    public void mostrar_datos_en_tabla(ArrayList<DatosAtracciones> datosAtraccion) {
+    private void tablaAtracionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaAtracionesMouseClicked
+
+        int index = tablaAtraciones.getSelectedRow();
+
+        DefaultTableModel tablaAtracciones = (DefaultTableModel) tablaAtraciones.getModel();
+        this.dispose();
+
+        FRM_AtraccionEspecifica frm_AtraccionEspecifica = new FRM_AtraccionEspecifica(this.provincia, tablaAtracciones.getValueAt(index, 0).toString().trim());
+        frm_AtraccionEspecifica.setLocationRelativeTo(null);
+        frm_AtraccionEspecifica.setVisible(true);
+    }//GEN-LAST:event_tablaAtracionesMouseClicked
+
+    public void mostrar_datos_en_tabla(ListaCD datosAtraccion) {
 
         if (datosAtraccion != null) {
 
             DefaultTableModel tablaAtracciones = (DefaultTableModel) tablaAtraciones.getModel();
-            for (DatosAtracciones i : datosAtraccion) {
-                String Provincia = i.getProvincia();
-                String nombreProvincia = i.getAtraccion();
-                Double precio = i.getPrecio();
 
-                //Insertar info en tabla
-                if (Provincia.equalsIgnoreCase(provincia)) {
-                    tablaAtracciones.addRow(new Object[]{nombreProvincia, NumberFormat.getCurrencyInstance(new Locale("es", "CR")).format(precio)});
-                }
-
-            }
+            tablaAtracciones = datosAtraccion.consultar(datosAtraccion.getCabeza(), provincia, tablaAtracciones);
 
         } else {
             JOptionPane.showMessageDialog(null, "No se encuentra en el sistema los datos");

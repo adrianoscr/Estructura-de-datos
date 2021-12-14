@@ -39,9 +39,9 @@ public class DB_Atracciones {
         }
     }
 
-    public ArrayList<DatosAtracciones> extraerDatosAtracciones() {
+    public ListaCD extraerDatosAtracciones() {
 
-        ArrayList<DatosAtracciones> listaAtracciones = new ArrayList<>();
+        ListaCD listaAtracciones = new ListaCD();
 
         this.conectarDB();
 
@@ -55,8 +55,8 @@ public class DB_Atracciones {
             ResultSet rs = pstmt.executeQuery(consultar);
 
             while (rs.next() == true) {
-                DatosAtracciones datosAtraccion = new DatosAtracciones(rs.getString("provincia"),rs.getDouble("Precio"), rs.getString("nombreAtraccion"), rs.getInt("id"), rs.getString("detalleAtraccion"));
-                listaAtracciones.add(datosAtraccion);
+                DatosAtracciones datosAtraccion = new DatosAtracciones(rs.getString("provincia"), rs.getDouble("Precio"), rs.getString("nombreAtraccion"), rs.getInt("id"), rs.getString("detalleAtraccion"));
+                listaAtracciones.insetar(datosAtraccion);
             }
 
             this.desconectarDB();
@@ -69,5 +69,36 @@ public class DB_Atracciones {
 
         return null;
     }
+
+//    public DatosAtracciones detalleAtraccion(String id) {
+//        String stmt = "SELECT * FROM `atracciones` WHERE `nombreAtraccion` = '" + id + "'";
+//
+//        this.conectarDB();
+//
+//        try {
+//            PreparedStatement pstmt = this.connectionA.prepareStatement(stmt);
+//
+//            ResultSet rs = pstmt.executeQuery(stmt);
+//
+//            while (rs.next() == true) {
+//
+//                DatosAtracciones datosAtracciones = new DatosAtracciones(
+//                        rs.getString("provincia"), 
+//                        rs.getDouble("Precio"), 
+//                        rs.getString("nombreAtraccion"),
+//                        rs.getInt("id"), 
+//                        rs.getString("detalleAtraccion"));
+//
+//            }
+//            this.desconectarDB();
+//            return datosAtracciones;
+//
+//        } catch (SQLException ex) {
+//            System.out.println("Error al consultar las atracciones." + ex.getMessage());
+//
+//        }
+//
+//        return null;
+//    }
 
 }

@@ -1,17 +1,16 @@
-
 package Logica;
 
 public class NodoLCD {
-    
+
     private DatosAtracciones dato;
     private NodoLCD siguiente;
     private NodoLCD anterior;
-    
-    public NodoLCD(DatosAtracciones dato){
+
+    public NodoLCD(DatosAtracciones dato) {
         this.dato = dato;
         this.siguiente = null;
         this.anterior = null;
-        
+
     }
 
     public DatosAtracciones getDato() {
@@ -37,6 +36,5 @@ public class NodoLCD {
     public void setAnterior(NodoLCD anterior) {
         this.anterior = anterior;
     }
-    
-   
+
 }
