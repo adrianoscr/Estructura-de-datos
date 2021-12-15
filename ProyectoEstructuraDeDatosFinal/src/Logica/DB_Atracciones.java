@@ -48,26 +48,30 @@ public class DB_Atracciones extends BaseDatosGeneral {
     }
 
     public DatosAtracciones detalleAtraccion(String id) {
-
+        
+        //Se declara la varible como null para uso posterior
         DatosAtracciones datosAtracciones = null;
-
+        
+       
         String stmt = "SELECT * FROM `galeria` WHERE `nombreAtraccion` = '" + id + "'";
 
         this.conectarDB();
-
+            
         try {
             PreparedStatement pstmt = this.connection.prepareStatement(stmt);
 
             ResultSet rs = pstmt.executeQuery(stmt);
 
             while (rs.next() == true) {
-
+                //Se le pasa la información al constructor de DatosAtracciones
                 datosAtracciones = new DatosAtracciones(
                         rs.getString("provincia"),
                         rs.getDouble("Precio"),
                         rs.getString("nombreAtraccion"),
                         rs.getInt("id"),
-                        rs.getString("detalleAtraccion"));
+                        rs.getString("detalleAtraccion"),
+                        rs.getString("imagen"),
+                        rs.getString("amenidades"));
 
             }
             this.desconectarDB();

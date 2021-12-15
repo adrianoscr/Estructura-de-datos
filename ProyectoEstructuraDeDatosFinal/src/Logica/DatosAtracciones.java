@@ -1,7 +1,7 @@
 package Logica;
 
 public class DatosAtracciones {
-
+    //variables
     private String provincia;
     private double precio;
     private String atraccion;
@@ -14,6 +14,7 @@ public class DatosAtracciones {
         this(null, 0.0, null, 0, null, "default.jpg", "");
     }
 
+    //Constructor para detalleAtraccion
     public DatosAtracciones(String provincia, double precio, String atraccion, int id, String detalleAtraccion, String imagen, String amenidades) {
         this.provincia = provincia;
         this.precio = precio;
@@ -23,7 +24,7 @@ public class DatosAtracciones {
         this.imagen = imagen;
         this.amenidades = amenidades;
     }
-
+    //Constructor para provincia
     public DatosAtracciones(String provincia, double precio, String atraccion, int id, String detalleAtraccion) {
         this.provincia = provincia;
         this.precio = precio;
@@ -32,6 +33,8 @@ public class DatosAtracciones {
         this.detalleAtraccion = detalleAtraccion;
 
     }
+    
+    //Getters y Setters de cada variable 
 
     public String getProvincia() {
         return provincia;

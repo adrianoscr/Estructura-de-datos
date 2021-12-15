@@ -31,15 +31,18 @@ public class FRM_AtraccionEspecifica extends javax.swing.JFrame {
 
         DatosAtracciones datosAtracciones = db_Atracciones.detalleAtraccion(descripcion);
         
+        //Seteo de textos dinámicos
         jLDetalleAtraccion.setText("<html>" + datosAtracciones.getDetalleAtraccion() + "</html>");
         jLnombreAtraccionSeleccionada.setText("<html><h1 style='color: #ffffff'>Atracción " + datosAtracciones.getAtraccion()+ "</h1></html>");
-
+        
+        //Seteo y escalado de ímagen de las atracciones
         ImageIcon imgIcon = new ImageIcon(getClass().getResource("/Contents/" + datosAtracciones.getImagen() + ""));
         Image imgEscalada = imgIcon.getImage().getScaledInstance(jLImagenAtraccion.getWidth(),
                 jLImagenAtraccion.getHeight(), Image.SCALE_SMOOTH);
         Icon iconoEscalado = new ImageIcon(imgEscalada);
         jLImagenAtraccion.setIcon(iconoEscalado);
 
+        //Llenado de array para pasar valores al FRM_AtraccionEspecifica
         String a = datosAtracciones.getAmenidades();
         String[] array = a.split(",");
 
