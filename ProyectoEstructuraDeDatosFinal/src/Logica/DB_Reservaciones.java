@@ -2,45 +2,16 @@ package Logica;
 
 import Logica.Carrito.Reservacion;
 import java.lang.reflect.InvocationTargetException;
-import java.sql.Connection;
-import java.sql.DriverManager;
+
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
-public class DB_Reservaciones {
-
-    public Connection connectionR;
+public class DB_Reservaciones extends BaseDatosGeneral {
 
     public DB_Reservaciones() {
-
-        // Registrar el driver de Mariadb/MySQL.
-        try {
-            Class.forName("org.mariadb.jdbc.Driver").getDeclaredConstructor().newInstance();
-        } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-        }
-    }
-
-    private void desconectarDB() {
-
-        try {
-            this.connectionR.commit();
-            this.connectionR.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(DB_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-    private void conectarDB() {
-        // Abrir la conexión.
-        try {
-            connectionR = (Connection) DriverManager.getConnection("jdbc:mariadb://139.177.205.149:3306/TURISMO", "proyectoclienteservidor", "centro1");
-        } catch (SQLException ex) {
-        }
+        super();
     }
 
     public void crearReservacion(colaReservacionesAnteriores reservacion) {
@@ -63,7 +34,7 @@ public class DB_Reservaciones {
 
             // Mandar a ejecutar la instrucción al servidor.
             try {
-                PreparedStatement pstmt = this.connectionR.prepareStatement(miInsertar);
+                PreparedStatement pstmt = this.connection.prepareStatement(miInsertar);
 
                 pstmt.execute();
 

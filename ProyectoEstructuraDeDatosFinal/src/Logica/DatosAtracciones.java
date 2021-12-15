@@ -1,30 +1,36 @@
-
 package Logica;
 
 public class DatosAtracciones {
-    
+
     private String provincia;
     private double precio;
     private String atraccion;
     private int id;
     private String detalleAtraccion;
-    
-    public DatosAtracciones(){
-        this.provincia="";
-        this.precio=0.0;
-        this.atraccion="";
-        this.id=0;
-        this.detalleAtraccion="";
-        
+    private String imagen;
+    private String amenidades;
+
+    public DatosAtracciones() {
+        this(null, 0.0, null, 0, null, "default.jpg", "");
     }
-    
-    public DatosAtracciones(String provincia, double precio, String atraccion, int id, String detalleAtraccion){
-        this.provincia=provincia;
-        this.precio=precio;
-        this.atraccion=atraccion;
-        this.id=id;
-        this.detalleAtraccion=detalleAtraccion;
-        
+
+    public DatosAtracciones(String provincia, double precio, String atraccion, int id, String detalleAtraccion, String imagen, String amenidades) {
+        this.provincia = provincia;
+        this.precio = precio;
+        this.atraccion = atraccion;
+        this.id = id;
+        this.detalleAtraccion = detalleAtraccion;
+        this.imagen = imagen;
+        this.amenidades = amenidades;
+    }
+
+    public DatosAtracciones(String provincia, double precio, String atraccion, int id, String detalleAtraccion) {
+        this.provincia = provincia;
+        this.precio = precio;
+        this.atraccion = atraccion;
+        this.id = id;
+        this.detalleAtraccion = detalleAtraccion;
+
     }
 
     public String getProvincia() {
@@ -66,8 +72,21 @@ public class DatosAtracciones {
     public void setDetalleAtraccion(String detalleAtraccion) {
         this.detalleAtraccion = detalleAtraccion;
     }
-    
-    
-    
-    
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public String getAmenidades() {
+        return amenidades;
+    }
+
+    public void setAmenidades(String amenidades) {
+        this.amenidades = amenidades;
+    }
+
 }

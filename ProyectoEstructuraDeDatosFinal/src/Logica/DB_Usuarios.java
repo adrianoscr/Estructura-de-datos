@@ -9,36 +9,11 @@ import java.util.logging.Logger;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class DB_Usuarios {
+public class DB_Usuarios extends BaseDatosGeneral {
 
-    public Connection connection;
-
-    public DB_Usuarios() {
-
-        // Registrar el driver de Mariadb/MySQL.
-        try {
-            Class.forName("org.mariadb.jdbc.Driver").getDeclaredConstructor().newInstance();
-        } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-        }
-    }
-
-    private void desconectarDB() {
-
-        try {
-            this.connection.commit();
-            this.connection.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(DB_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-    private void conectarDB() {
-        // Abrir la conexión.
-        try {
-            connection = (Connection) DriverManager.getConnection("jdbc:mariadb://139.177.205.149:3306/TURISMO", "proyectoclienteservidor", "centro1");
-        } catch (SQLException ex) {
-        }
+ 
+    public DB_Usuarios(){
+        super();
     }
 
     public void crearUsuario(Usuario usuario) {
@@ -50,9 +25,8 @@ public class DB_Usuarios {
                 + usuario.getNombreUsuario() + "\", \""
                 + usuario.getCorreo() + "\", \""
                 + usuario.getContrasenna() + "\");";
-        
-        // Mandar a ejecutar la instrucción al servidor.
 
+        // Mandar a ejecutar la instrucción al servidor.
         try {
             PreparedStatement pstmt = this.connection.prepareStatement(miInsertar);
 
@@ -65,8 +39,7 @@ public class DB_Usuarios {
 
         this.desconectarDB();
     }
-    
-    
+
     public VerificarUsuario verificarUsuario(String usuario, String password) {
         //variables
 
@@ -83,11 +56,11 @@ public class DB_Usuarios {
 
             if (rs.next() == true) {
                 VerificarUsuario datosUsuario = new VerificarUsuario(rs.getString("NombreUsuario"), rs.getString("Contrasenna"));
-                 this.desconectarDB();
-                 return datosUsuario;
-                 
+                this.desconectarDB();
+                return datosUsuario;
+
             } else {
-                 this.desconectarDB();
+                this.desconectarDB();
                 return null;
             }
 
@@ -96,7 +69,7 @@ public class DB_Usuarios {
 
         }
 
-       return null;
+        return null;
 
     }
 

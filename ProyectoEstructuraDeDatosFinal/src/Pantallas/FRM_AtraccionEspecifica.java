@@ -25,40 +25,40 @@ public class FRM_AtraccionEspecifica extends javax.swing.JFrame {
         initComponents();
 
         provincia = provincias;
-//        this.descripcion = descripcion;
-//
-//        DB_Atracciones db_Atracciones = new DB_atracciones();
-//
-//        DatosAtracciones ret = db_Atracciones.detalleAtraccion(descripcion);
-//        
-//        jLDetalleAtraccion.setText("<html>" + ret.detalleAtraccion + "</html>");
-//        jLnombreAtraccionSeleccionada.setText("<html><h1 style='color: #ffffff'>Atracción " + ret.atraccion + "</h1></html>");
-//
-//        ImageIcon imgIcon = new ImageIcon(getClass().getResource("/Contents/" + ret.imagen + ""));
-//        Image imgEscalada = imgIcon.getImage().getScaledInstance(jLImagenAtraccion.getWidth(),
-//                jLImagenAtraccion.getHeight(), Image.SCALE_SMOOTH);
-//        Icon iconoEscalado = new ImageIcon(imgEscalada);
-//        jLImagenAtraccion.setIcon(iconoEscalado);
-//
-//        String a = ret.amenidades;
-//        String[] array = a.split(",");
-//
-//        jLamenidad1.setText("<html><div>" + array[0] + "</div></html>");
-//        jLamenidad2.setText("<html><div>" + array[1] + "</div></html>");
-//        jLamenidad3.setText("<html><div>" + array[2] + "</div></html>");
-//
-//        jLamenidad1.setHorizontalAlignment(SwingConstants.CENTER);
-//        jLamenidad2.setHorizontalAlignment(SwingConstants.CENTER);
-//        jLamenidad3.setHorizontalAlignment(SwingConstants.CENTER);
+        this.descripcion = descripcion;
+
+        DB_Atracciones db_Atracciones = new DB_Atracciones();
+
+        DatosAtracciones datosAtracciones = db_Atracciones.detalleAtraccion(descripcion);
+        
+        jLDetalleAtraccion.setText("<html>" + datosAtracciones.getDetalleAtraccion() + "</html>");
+        jLnombreAtraccionSeleccionada.setText("<html><h1 style='color: #ffffff'>Atracción " + datosAtracciones.getAtraccion()+ "</h1></html>");
+
+        ImageIcon imgIcon = new ImageIcon(getClass().getResource("/Contents/" + datosAtracciones.getImagen() + ""));
+        Image imgEscalada = imgIcon.getImage().getScaledInstance(jLImagenAtraccion.getWidth(),
+                jLImagenAtraccion.getHeight(), Image.SCALE_SMOOTH);
+        Icon iconoEscalado = new ImageIcon(imgEscalada);
+        jLImagenAtraccion.setIcon(iconoEscalado);
+
+        String a = datosAtracciones.getAmenidades();
+        String[] array = a.split(",");
+
+        jLamenidad1.setText("<html><div>" + array[0] + "</div></html>");
+        jLamenidad2.setText("<html><div>" + array[1] + "</div></html>");
+        jLamenidad3.setText("<html><div>" + array[2] + "</div></html>");
+
+        jLamenidad1.setHorizontalAlignment(SwingConstants.CENTER);
+        jLamenidad2.setHorizontalAlignment(SwingConstants.CENTER);
+        jLamenidad3.setHorizontalAlignment(SwingConstants.CENTER);
     }
 
     public FRM_AtraccionEspecifica() {
 
-//        initComponents();
-//        DB_atracciones atraccion = new DB_atracciones();
-//
-//        DatosAtracciones ret = atraccion.detalleAtraccion(descripcion);
-//        jLDetalleAtraccion.setText("<html>" + ret.detalleAtraccion + "<html>");
+        initComponents();
+        DB_Atracciones atraccion = new DB_Atracciones();
+
+        DatosAtracciones ret = atraccion.detalleAtraccion(descripcion);
+        jLDetalleAtraccion.setText("<html>" + ret.getDetalleAtraccion() + "<html>");
     }
 
     /**

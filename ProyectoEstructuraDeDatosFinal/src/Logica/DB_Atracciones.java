@@ -1,16 +1,10 @@
 package Logica;
 
-import java.lang.reflect.InvocationTargetException;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 
-public class DB_Atracciones {
+public class DB_Atracciones extends BaseDatosGeneral {
 
     // variables para cambio de información dinámica en el FRM_AtraccionesProvincia
     public String nombre_provincia;
@@ -18,25 +12,8 @@ public class DB_Atracciones {
     public String img;
     public int id;
 
-    public Connection connectionA;
-
-    private void desconectarDB() {
-
-        try {
-            this.connectionA.commit();
-            this.connectionA.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(DB_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-    private void conectarDB() {
-        // Abrir la conexión.
-        try {
-            connectionA = (Connection) DriverManager.getConnection("jdbc:mariadb://139.177.205.149:3306/TURISMO", "proyectoclienteservidor", "centro1");
-        } catch (SQLException ex) {
-        }
+    public DB_Atracciones() {
+        super();
     }
 
     public ListaCD extraerDatosAtracciones() {
@@ -50,7 +27,7 @@ public class DB_Atracciones {
 
         // Mandar a ejecutar la instrucción al servidor.
         try {
-            PreparedStatement pstmt = this.connectionA.prepareStatement(consultar);
+            PreparedStatement pstmt = this.connection.prepareStatement(consultar);
 
             ResultSet rs = pstmt.executeQuery(consultar);
 
@@ -70,35 +47,38 @@ public class DB_Atracciones {
         return null;
     }
 
-//    public DatosAtracciones detalleAtraccion(String id) {
-//        String stmt = "SELECT * FROM `atracciones` WHERE `nombreAtraccion` = '" + id + "'";
-//
-//        this.conectarDB();
-//
-//        try {
-//            PreparedStatement pstmt = this.connectionA.prepareStatement(stmt);
-//
-//            ResultSet rs = pstmt.executeQuery(stmt);
-//
-//            while (rs.next() == true) {
-//
-//                DatosAtracciones datosAtracciones = new DatosAtracciones(
-//                        rs.getString("provincia"), 
-//                        rs.getDouble("Precio"), 
-//                        rs.getString("nombreAtraccion"),
-//                        rs.getInt("id"), 
-//                        rs.getString("detalleAtraccion"));
-//
-//            }
-//            this.desconectarDB();
-//            return datosAtracciones;
-//
-//        } catch (SQLException ex) {
-//            System.out.println("Error al consultar las atracciones." + ex.getMessage());
-//
-//        }
-//
-//        return null;
-//    }
+    public DatosAtracciones detalleAtraccion(String id) {
+
+        DatosAtracciones datosAtracciones = null;
+
+        String stmt = "SELECT * FROM `galeria` WHERE `nombreAtraccion` = '" + id + "'";
+
+        this.conectarDB();
+
+        try {
+            PreparedStatement pstmt = this.connection.prepareStatement(stmt);
+
+            ResultSet rs = pstmt.executeQuery(stmt);
+
+            while (rs.next() == true) {
+
+                datosAtracciones = new DatosAtracciones(
+                        rs.getString("provincia"),
+                        rs.getDouble("Precio"),
+                        rs.getString("nombreAtraccion"),
+                        rs.getInt("id"),
+                        rs.getString("detalleAtraccion"));
+
+            }
+            this.desconectarDB();
+            return datosAtracciones;
+
+        } catch (SQLException ex) {
+            System.out.println("Error al consultar las atracciones." + ex.getMessage());
+
+        }
+
+        return null;
+    }
 
 }
