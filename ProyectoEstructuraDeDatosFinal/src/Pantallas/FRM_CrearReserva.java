@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Pantallas;
 
 import Logica.Carrito.*;
@@ -14,21 +9,24 @@ import javax.swing.JOptionPane;
  *
  * @author Cristopher M
  */
-
 public class FRM_CrearReserva extends javax.swing.JFrame {
 
     //Se pasa la información de la pila que guarda cada una de las reservas. 
-    private pilaReservacion reservaciones;
+    private pilaReservacion miPila;
     private Usuario Usuario;
     private String provincia;
+    private DatosAtracciones datosAtracciones;
 
-    public FRM_CrearReserva(pilaReservacion usuarioReservas, Usuario usuario, String provicia) {
+    public FRM_CrearReserva(pilaReservacion usuarioReservas, Usuario usuario, String provicia, DatosAtracciones datosAtracciones) {
         initComponents();
+
+        this.datosAtracciones = datosAtracciones;
         this.provincia = provicia;
         this.Usuario = usuario;
-        this.reservaciones = usuarioReservas;
-        this.lbl_costoPersona.setText("5000");
+        this.miPila = usuarioReservas;
+
         this.txt_nombreReservacion.setText(usuario.getNombreUsuario());
+        this.lbl_costoPersona.setText(String.valueOf(datosAtracciones.getPrecio()));
 
     }
 
@@ -41,7 +39,7 @@ public class FRM_CrearReserva extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txt_nombreReservacion = new javax.swing.JTextField();
+        txt_nombreReservacion = new javax.swing.JLabel();
         btn_guardar = new javax.swing.JButton();
         btn_cancelar = new javax.swing.JButton();
         lbl_costoIVA = new javax.swing.JTextField();
@@ -52,20 +50,11 @@ public class FRM_CrearReserva extends javax.swing.JFrame {
         Lbl_Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txt_nombreReservacion.setBackground(new java.awt.Color(168, 205, 122));
         txt_nombreReservacion.setForeground(new java.awt.Color(0, 0, 0));
-        txt_nombreReservacion.setText("Indique el dueño de la reservación");
-        txt_nombreReservacion.setBorder(null);
-        txt_nombreReservacion.setCaretColor(new java.awt.Color(107, 170, 28));
-        txt_nombreReservacion.setSelectedTextColor(new java.awt.Color(107, 170, 28));
-        txt_nombreReservacion.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txt_nombreReservacionFocusGained(evt);
-            }
-        });
-        getContentPane().add(txt_nombreReservacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 230, 30));
+        getContentPane().add(txt_nombreReservacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 166, 250, 30));
 
         btn_guardar.setBackground(new java.awt.Color(2, 154, 213));
         btn_guardar.setForeground(new java.awt.Color(2, 154, 213));
@@ -134,12 +123,6 @@ public class FRM_CrearReserva extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txt_nombreReservacionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_nombreReservacionFocusGained
-
-        txt_nombreReservacion.setText("");
-
-    }//GEN-LAST:event_txt_nombreReservacionFocusGained
-
     private void sp_cantidadPersonasStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sp_cantidadPersonasStateChanged
 
         //Se recuperan los valores y se realiza el calculo correspondiente al costo. 
@@ -158,7 +141,7 @@ public class FRM_CrearReserva extends javax.swing.JFrame {
 
         this.dispose();
 
-        FRM_AtraccionesCR atraccionesCR = new FRM_AtraccionesCR();
+        FRM_AtraccionesCR atraccionesCR = new FRM_AtraccionesCR(miPila, Usuario);
 
         atraccionesCR.setLocationRelativeTo(null);
         atraccionesCR.setVisible(true);
@@ -195,7 +178,7 @@ public class FRM_CrearReserva extends javax.swing.JFrame {
                 Reservacion miReservacion = new Reservacion(id_Usuario, id_Reserva, nombreReservacion, cantidadPersonas, fechaHora, costoPersona, costoTotal, costoImpuestos);
 
                 //Se guarda la reservación en la pila
-                reservaciones.push(new nodoReservacion(miReservacion));
+                miPila.push(new nodoReservacion(miReservacion));
 
                 //Se le comunica al usuario que culmino la operación. 
                 JOptionPane.showMessageDialog(null, "La reservación se ha guardado en su carrito", "Reservación Exitosa", JOptionPane.INFORMATION_MESSAGE);
@@ -204,29 +187,23 @@ public class FRM_CrearReserva extends javax.swing.JFrame {
                 this.dispose();
 
                 //Al iniciar esta pantalla se hace con el constructor que recibe una pila para conservarla y no perder los datos de la pila
-                FRM_AtraccionesCR atraccionesCR = new FRM_AtraccionesCR(reservaciones);
+                FRM_AtraccionesCR atraccionesCR = new FRM_AtraccionesCR(miPila, Usuario);
 
                 atraccionesCR.setLocationRelativeTo(null);
                 atraccionesCR.setVisible(true);
 
-                
             }
 
         } else {
             //Mendaje para alertar de que la pila de reservas esta completada.
             JOptionPane.showMessageDialog(this, "Ya alcazó el máximo de 5 reservas permitidas por usuario", "Error creación reservacion", JOptionPane.ERROR_MESSAGE);
             this.dispose();
-            
+
             //Al iniciar esta pantalla se hace con el constructor que recibe una pila para conservarla y no perder los datos de la pila
-            FRM_AtraccionesCR atraccionesCR = new FRM_AtraccionesCR(reservaciones);
+            FRM_AtraccionesCR atraccionesCR = new FRM_AtraccionesCR(miPila, Usuario);
 
             atraccionesCR.setLocationRelativeTo(null);
             atraccionesCR.setVisible(true);
-
-
-              //Lo puse aquí como para pruebas nada más RECORDAR QUITAR LUEGO
-              //FRM_ListaReservaciones listaReservaciones = new FRM_ListaReservaciones(reservaciones);
-              //listaReservaciones.setVisible(true);
 
         }
 
@@ -246,6 +223,6 @@ public class FRM_CrearReserva extends javax.swing.JFrame {
     private javax.swing.JTextField lbl_costoTotal;
     private javax.swing.JSpinner sp_cantidadPersonas;
     private javax.swing.JSpinner sp_fechaHora;
-    private javax.swing.JTextField txt_nombreReservacion;
+    private javax.swing.JLabel txt_nombreReservacion;
     // End of variables declaration//GEN-END:variables
 }

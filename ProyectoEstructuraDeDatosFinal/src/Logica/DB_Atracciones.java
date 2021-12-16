@@ -52,10 +52,10 @@ public class DB_Atracciones extends BaseDatosGeneral {
         //Se declara la varible como null para uso posterior
         DatosAtracciones datosAtracciones = null;
         
-       
-        String stmt = "SELECT * FROM `galeria` WHERE `nombreAtraccion` = '" + id + "'";
 
         this.conectarDB();
+        
+        String stmt = "SELECT * FROM `galeria` WHERE `nombreAtraccion` = '" + id + "'";
             
         try {
             PreparedStatement pstmt = this.connection.prepareStatement(stmt);

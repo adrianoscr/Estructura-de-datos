@@ -5,13 +5,12 @@
  */
 package Pantallas;
 
+import Logica.Carrito.pilaReservacion;
 import Logica.DB_Usuarios;
+import Logica.Usuario;
 import Logica.VerificarUsuario;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.io.IOException;
-import javax.swing.JPanel;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class FRM_Entrada extends javax.swing.JFrame {
     public static int contadorReservas = 0;
+    public Usuario nuevoUsuario;
 
     private Image backgroundImage = Toolkit.getDefaultToolkit().getImage("C:\\Users\\ExtremeTech\\Desktop\\Adrián 2021\\Tercer Cuatrimestre Bachiller\\Estructura de datos\\Proyecto\\Github\\Estructura-de-datos\\ProyectoEstructuraDeDatosFinal\\src\\Contents\\frm_entrada.png");
 
@@ -129,6 +129,8 @@ public class FRM_Entrada extends javax.swing.JFrame {
 
     private void jBEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEntrarActionPerformed
         //Información ingresada
+        pilaReservacion miPila = new pilaReservacion();
+        
         String usuario = jTUsuario.getText();
         String contrasenna = new String(jPassword.getPassword());
 
@@ -144,7 +146,7 @@ public class FRM_Entrada extends javax.swing.JFrame {
             
             this.dispose();
             
-            FRM_AtraccionesCR frm_AtraccionesCR = new FRM_AtraccionesCR();
+            FRM_AtraccionesCR frm_AtraccionesCR = new FRM_AtraccionesCR(miPila, new Usuario(usuario, contrasenna));
             frm_AtraccionesCR.setLocationRelativeTo(null);
             frm_AtraccionesCR.setVisible(true);
             

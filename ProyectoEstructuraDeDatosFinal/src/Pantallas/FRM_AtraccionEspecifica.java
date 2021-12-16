@@ -1,14 +1,13 @@
 package Pantallas;
 
+import Logica.Carrito.pilaReservacion;
 import Logica.DB_Atracciones;
 
 import Logica.DatosAtracciones;
-import Logica.ListaCD;
-import java.awt.BorderLayout;
+import Logica.Usuario;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 /**
@@ -17,24 +16,29 @@ import javax.swing.SwingConstants;
  */
 public class FRM_AtraccionEspecifica extends javax.swing.JFrame {
 
-    String provincia;
-    int id;
-    String descripcion;
+    private String provincia;
+    private String descripcion;
+    private pilaReservacion miPila;
+    private Usuario nuevoUsuario;
+    private DatosAtracciones datosAtracciones;
 
-    public FRM_AtraccionEspecifica(String provincias, String descripcion) {
+    int id;
+
+    public FRM_AtraccionEspecifica(String provincias, String descripcion, pilaReservacion reservacionesUsuario, Usuario nuevoUsuario) {
         initComponents();
 
-        provincia = provincias;
+        this.miPila = reservacionesUsuario;
+        this.nuevoUsuario = nuevoUsuario;
+        this.provincia = provincias;
         this.descripcion = descripcion;
 
         DB_Atracciones db_Atracciones = new DB_Atracciones();
+        this.datosAtracciones = db_Atracciones.detalleAtraccion(descripcion);
 
-        DatosAtracciones datosAtracciones = db_Atracciones.detalleAtraccion(descripcion);
-        
         //Seteo de textos dinámicos
         jLDetalleAtraccion.setText("<html>" + datosAtracciones.getDetalleAtraccion() + "</html>");
-        jLnombreAtraccionSeleccionada.setText("<html><h1 style='color: #ffffff'>Atracción " + datosAtracciones.getAtraccion()+ "</h1></html>");
-        
+        jLnombreAtraccionSeleccionada.setText("<html><h1 style='color: #ffffff'>Atracción " + datosAtracciones.getAtraccion() + "</h1></html>");
+
         //Seteo y escalado de ímagen de las atracciones
         ImageIcon imgIcon = new ImageIcon(getClass().getResource("/Contents/" + datosAtracciones.getImagen() + ""));
         Image imgEscalada = imgIcon.getImage().getScaledInstance(jLImagenAtraccion.getWidth(),
@@ -113,21 +117,29 @@ public class FRM_AtraccionEspecifica extends javax.swing.JFrame {
         jLDetalleAtraccion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         getContentPane().add(jLDetalleAtraccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 110, 600, 250));
 
+        jbtnAtras.setBackground(new java.awt.Color(255, 255, 255));
+        jbtnAtras.setForeground(new java.awt.Color(255, 255, 255));
+        jbtnAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/Botón Atras.png"))); // NOI18N
         jbtnAtras.setText("Atrás");
+        jbtnAtras.setBorder(null);
         jbtnAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnAtrasActionPerformed(evt);
             }
         });
-        getContentPane().add(jbtnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 500, 100, 40));
+        getContentPane().add(jbtnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 500, 160, 40));
 
+        jbtnReservar.setBackground(new java.awt.Color(255, 255, 255));
+        jbtnReservar.setForeground(new java.awt.Color(255, 255, 255));
+        jbtnReservar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/Botón Reservacion.png"))); // NOI18N
         jbtnReservar.setText("Reservar");
+        jbtnReservar.setBorder(null);
         jbtnReservar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnReservarActionPerformed(evt);
             }
         });
-        getContentPane().add(jbtnReservar, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 500, 110, 40));
+        getContentPane().add(jbtnReservar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 500, 160, 40));
 
         jLnombreAtraccionSeleccionada.setToolTipText("");
         getContentPane().add(jLnombreAtraccionSeleccionada, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 720, 50));
@@ -142,12 +154,18 @@ public class FRM_AtraccionEspecifica extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnReservarActionPerformed
-        // TODO add your handling code here:
+
+        //SE PASAN LOS DATOS.
+        this.dispose();
+        FRM_CrearReserva crearReserva = new FRM_CrearReserva(miPila, nuevoUsuario, provincia, datosAtracciones);
+        crearReserva.setLocationRelativeTo(null);
+        crearReserva.setVisible(true);
     }//GEN-LAST:event_jbtnReservarActionPerformed
 
     private void jbtnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAtrasActionPerformed
+
         this.dispose();
-        FRM_AtraccionesProvincia detalleAtraccion = new FRM_AtraccionesProvincia(provincia);
+        FRM_AtraccionesProvincia detalleAtraccion = new FRM_AtraccionesProvincia(provincia, miPila, nuevoUsuario);
         detalleAtraccion.setVisible(true);
         detalleAtraccion.setLocationRelativeTo(null);
 

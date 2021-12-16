@@ -19,6 +19,11 @@ public class Usuario {
         this.Correo = Correo;
         this.contrasenna = contrasenna;
     }
+    
+    public Usuario(String NombreUsuario, String contrasenna) {
+        this.NombreUsuario = NombreUsuario;
+        this.contrasenna = contrasenna;
+    }
 
     public String getContrasenna() {
         return contrasenna;

@@ -9,9 +9,9 @@ import Logica.Carrito.Reservacion;
 import Logica.Carrito.nodoReservacion;
 import Logica.Carrito.pilaReservacion;
 import Logica.DB_Reservaciones;
+import Logica.Usuario;
 import Logica.colaReservacionesAnteriores;
 import Logica.nodoColaAnteriores;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,6 +31,7 @@ public class FRM_ListaReservaciones extends javax.swing.JFrame {
     public FRM_ListaReservaciones(pilaReservacion miPila) {
         initComponents();
         this.miPila = miPila;
+
     }
 
     /**
@@ -42,6 +43,7 @@ public class FRM_ListaReservaciones extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btn_Home = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jT_ListaReservaciones = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -49,11 +51,25 @@ public class FRM_ListaReservaciones extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_Home.setBackground(new java.awt.Color(107, 170, 28));
+        btn_Home.setForeground(new java.awt.Color(107, 170, 28));
+        btn_Home.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/btn_home.png"))); // NOI18N
+        btn_Home.setBorder(null);
+        btn_Home.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_HomeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_Home, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 20, -1, -1));
 
         jT_ListaReservaciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -129,8 +145,21 @@ public class FRM_ListaReservaciones extends javax.swing.JFrame {
 
     }//GEN-LAST:event_formWindowOpened
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosed
+
+    private void btn_HomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HomeActionPerformed
+
+        this.dispose();
+        FRM_AtraccionesCR atraccionesCR = new FRM_AtraccionesCR();
+        atraccionesCR.setLocationRelativeTo(null);
+        atraccionesCR.setVisible(true);
+    }//GEN-LAST:event_btn_HomeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_Home;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jT_ListaReservaciones;

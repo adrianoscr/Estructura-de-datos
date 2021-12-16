@@ -1,12 +1,9 @@
 package Pantallas;
 
-import Logica.DB_Usuarios;
+import Logica.Carrito.pilaReservacion;
 import Logica.DB_Atracciones;
-import Logica.DatosAtracciones;
 import Logica.ListaCD;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Locale;
+import Logica.Usuario;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -14,16 +11,20 @@ import javax.swing.table.DefaultTableModel;
 public class FRM_AtraccionesProvincia extends javax.swing.JFrame {
 
     private String provincia;
+    private pilaReservacion miPila;
+    private Usuario nuevoUsuario;
 
     public FRM_AtraccionesProvincia() {
         initComponents();
 
     }
 
-    public FRM_AtraccionesProvincia(String provincia) {
+    public FRM_AtraccionesProvincia(String provincia, pilaReservacion miPila, Usuario nuevoUsuario) {
         initComponents();
 
+        this.miPila = miPila;
         this.provincia = provincia;
+        this.nuevoUsuario = nuevoUsuario;
 
         ListaCD datosAtracciones = new ListaCD();
 
@@ -183,7 +184,7 @@ public class FRM_AtraccionesProvincia extends javax.swing.JFrame {
         DefaultTableModel tablaAtracciones = (DefaultTableModel) tablaAtraciones.getModel();
         this.dispose();
 
-        FRM_AtraccionEspecifica frm_AtraccionEspecifica = new FRM_AtraccionEspecifica(this.provincia, tablaAtracciones.getValueAt(index, 0).toString().trim());
+        FRM_AtraccionEspecifica frm_AtraccionEspecifica = new FRM_AtraccionEspecifica(this.provincia, tablaAtracciones.getValueAt(index, 0).toString().trim(), miPila, nuevoUsuario);
         frm_AtraccionEspecifica.setLocationRelativeTo(null);
         frm_AtraccionEspecifica.setVisible(true);
     }//GEN-LAST:event_tablaAtracionesMouseClicked
