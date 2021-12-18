@@ -3,8 +3,6 @@ package Logica.Carrito;
 public class Reservacion {
 
     /* ----------- Atributos ----------- */
-    private int id_Usuario;
-    private int id_Reserva;
     private String nombreReservacion;
     private int cantidadPersonas;
     private String fechaHora;
@@ -13,9 +11,7 @@ public class Reservacion {
     private Float costoImpuestos;
 
     /* ----------- Constructores ----------- */
-    public Reservacion(int id_Usuario, int id_Reserva, String nombreReservacion, int cantidadPersonas, String fechaHora, Float costoPersona, Float costoTotal, Float costoImpuestos) {
-        this.id_Usuario = id_Usuario;
-        this.id_Reserva = id_Reserva;
+    public Reservacion(String nombreReservacion, int cantidadPersonas, String fechaHora, Float costoPersona, Float costoTotal, Float costoImpuestos) {
         this.nombreReservacion = nombreReservacion;
         this.cantidadPersonas = cantidadPersonas;
         this.fechaHora = fechaHora;
@@ -28,22 +24,6 @@ public class Reservacion {
     }
 
     /* ----------- Getters & Setters ----------- */
-    public int getId_Usuario() {
-        return id_Usuario;
-    }
-
-    public void setId_Usuario(int id_Usuario) {
-        this.id_Usuario = id_Usuario;
-    }
-
-    public int getId_Reserva() {
-        return id_Reserva;
-    }
-
-    public void setId_Reserva(int id_Reserva) {
-        this.id_Reserva = id_Reserva;
-    }
-
     public String getNombreReservacion() {
         return nombreReservacion;
     }

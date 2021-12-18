@@ -16,31 +16,21 @@ import javax.swing.JOptionPane;
 public class FRM_AtraccionesCR extends javax.swing.JFrame {
 
     private boolean vamosAlLogin = true;
-    private pilaReservacion miPila; 
+    private pilaReservacion miPila;
     private Usuario nuevoUsuario;
 
     /**
      * Creates new form FRM_AtraccionesCR
      */
-    
     //Constructor desde el menu
-    public FRM_AtraccionesCR() {
-        
-        initComponents();
-        
-        this.miPila = new pilaReservacion();
-        
-    }
-    
     //Constructor para conservar los datos de la pila
     public FRM_AtraccionesCR(pilaReservacion prueba, Usuario nuevoUsuario) {
-        
+
         initComponents();
         this.miPila = prueba;
         this.nuevoUsuario = nuevoUsuario;
 
     }
-   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -51,6 +41,8 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
+        Btn_Consulta = new javax.swing.JButton();
         btn_Salir = new javax.swing.JButton();
         jBtnAlajuela = new javax.swing.JButton();
         Btn_Carrito = new javax.swing.JButton();
@@ -70,6 +62,21 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/Logo.png"))); // NOI18N
+        jLabel2.setRequestFocusEnabled(false);
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 80, 80));
+
+        Btn_Consulta.setBackground(new java.awt.Color(107, 170, 28));
+        Btn_Consulta.setForeground(new java.awt.Color(107, 170, 28));
+        Btn_Consulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/Lupa.jpg"))); // NOI18N
+        Btn_Consulta.setBorder(null);
+        Btn_Consulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_ConsultaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Btn_Consulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 20, -1, -1));
 
         btn_Salir.setBackground(new java.awt.Color(107, 170, 28));
         btn_Salir.setForeground(new java.awt.Color(107, 170, 28));
@@ -174,7 +181,7 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
 
         String provicia = "Limón";
 
-        this.dispose(   );
+        this.dispose();
 
         FRM_AtraccionesProvincia frm_atraccionesProvincia = new FRM_AtraccionesProvincia(provicia, miPila, nuevoUsuario);
         frm_atraccionesProvincia.setLocationRelativeTo(null);
@@ -270,16 +277,23 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_SalirActionPerformed
 
     private void Btn_CarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_CarritoActionPerformed
-        
+
         this.dispose();
-        FRM_ListaReservaciones frm_ListaReservaciones = new FRM_ListaReservaciones(miPila);
+        FRM_ListaReservaciones frm_ListaReservaciones = new FRM_ListaReservaciones(miPila, nuevoUsuario);
         frm_ListaReservaciones.setVisible(true);
- 
+
     }//GEN-LAST:event_Btn_CarritoActionPerformed
+
+    private void Btn_ConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ConsultaActionPerformed
+        this.dispose();
+        FRM_ConsultasReservaciones frm_ConsultasReservaciones = new FRM_ConsultasReservaciones(miPila, nuevoUsuario);
+        frm_ConsultasReservaciones.setVisible(true);
+    }//GEN-LAST:event_Btn_ConsultaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btn_Carrito;
+    private javax.swing.JButton Btn_Consulta;
     private javax.swing.JButton btn_Salir;
     private javax.swing.JButton jBtnAlajuela;
     private javax.swing.JButton jBtnCartago;
@@ -289,5 +303,6 @@ public class FRM_AtraccionesCR extends javax.swing.JFrame {
     private javax.swing.JButton jBtnPuntarenas;
     private javax.swing.JButton jBtnSanJose;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

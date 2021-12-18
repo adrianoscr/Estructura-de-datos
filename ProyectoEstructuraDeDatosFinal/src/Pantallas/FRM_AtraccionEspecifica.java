@@ -77,6 +77,7 @@ public class FRM_AtraccionEspecifica extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
         jLtitulocaracteristica = new javax.swing.JLabel();
         jLamenidad1 = new javax.swing.JLabel();
         jLamenidad2 = new javax.swing.JLabel();
@@ -91,6 +92,10 @@ public class FRM_AtraccionEspecifica extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/Logo.png"))); // NOI18N
+        jLabel2.setRequestFocusEnabled(false);
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 80, 90));
 
         jLtitulocaracteristica.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLtitulocaracteristica.setText("Características:");
@@ -177,6 +182,7 @@ public class FRM_AtraccionEspecifica extends javax.swing.JFrame {
     private javax.swing.JLabel jLDetalleAtraccion;
     private javax.swing.JLabel jLImagenAtraccion;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLamenidad1;
     private javax.swing.JLabel jLamenidad2;
     private javax.swing.JLabel jLamenidad3;

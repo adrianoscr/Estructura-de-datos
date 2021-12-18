@@ -39,6 +39,7 @@ public class FRM_CrearReserva extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
         txt_nombreReservacion = new javax.swing.JLabel();
         btn_guardar = new javax.swing.JButton();
         btn_cancelar = new javax.swing.JButton();
@@ -52,6 +53,10 @@ public class FRM_CrearReserva extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/Logo.png"))); // NOI18N
+        jLabel2.setRequestFocusEnabled(false);
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 80, 90));
 
         txt_nombreReservacion.setForeground(new java.awt.Color(0, 0, 0));
         getContentPane().add(txt_nombreReservacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 166, 250, 30));
@@ -110,6 +115,7 @@ public class FRM_CrearReserva extends javax.swing.JFrame {
         sp_fechaHora.setModel(new javax.swing.SpinnerDateModel());
         getContentPane().add(sp_fechaHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, 240, 30));
 
+        sp_cantidadPersonas.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         sp_cantidadPersonas.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 sp_cantidadPersonasStateChanged(evt);
@@ -158,8 +164,6 @@ public class FRM_CrearReserva extends javax.swing.JFrame {
             //variables necesarias para la conversion de fecha a string. 
             //SimpleDateFormat sdf = new SimpleDateFormat("dd/yyyy"); 
             //Se guarda la informacióin de la reserva.
-            int id_Usuario = 1;
-            int id_Reserva = 1;
             String nombreReservacion = txt_nombreReservacion.getText();
             int cantidadPersonas = (Integer) sp_cantidadPersonas.getValue();
             String fechaHora = sp_fechaHora.getValue().toString();
@@ -175,7 +179,7 @@ public class FRM_CrearReserva extends javax.swing.JFrame {
             } else {
 
                 //Se crea una nueva reservación
-                Reservacion miReservacion = new Reservacion(id_Usuario, id_Reserva, nombreReservacion, cantidadPersonas, fechaHora, costoPersona, costoTotal, costoImpuestos);
+                Reservacion miReservacion = new Reservacion(nombreReservacion, cantidadPersonas, fechaHora, costoPersona, costoTotal, costoImpuestos);
 
                 //Se guarda la reservación en la pila
                 miPila.push(new nodoReservacion(miReservacion));
@@ -218,6 +222,7 @@ public class FRM_CrearReserva extends javax.swing.JFrame {
     private javax.swing.JLabel Lbl_Background;
     private javax.swing.JButton btn_cancelar;
     private javax.swing.JButton btn_guardar;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField lbl_costoIVA;
     private javax.swing.JTextField lbl_costoPersona;
     private javax.swing.JTextField lbl_costoTotal;

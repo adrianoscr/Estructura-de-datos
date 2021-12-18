@@ -6,31 +6,26 @@
 package Pantallas;
 
 import Logica.Carrito.Reservacion;
-import Logica.Carrito.nodoReservacion;
 import Logica.Carrito.pilaReservacion;
 import Logica.DB_Reservaciones;
 import Logica.Usuario;
-import Logica.colaReservacionesAnteriores;
-import Logica.nodoColaAnteriores;
-import javax.swing.JOptionPane;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author ExtremeTech
  */
-public class FRM_ListaReservaciones extends javax.swing.JFrame {
+public class FRM_ConsultasReservaciones extends javax.swing.JFrame {
 
     private pilaReservacion miPila;
-    private colaReservacionesAnteriores colaReservaciones = new colaReservacionesAnteriores();
-    private boolean colaLlena = false;
     private Usuario nuevoUsuario;
 
-    public FRM_ListaReservaciones() {
+    public FRM_ConsultasReservaciones() {
         initComponents();
     }
 
-    public FRM_ListaReservaciones(pilaReservacion miPila, Usuario nuevoUsuario) {
+    public FRM_ConsultasReservaciones(pilaReservacion miPila, Usuario nuevoUsuario) {
         initComponents();
         this.miPila = miPila;
         this.nuevoUsuario = nuevoUsuario;
@@ -64,7 +59,6 @@ public class FRM_ListaReservaciones extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Contents/Logo.png"))); // NOI18N
-        jLabel2.setPreferredSize(new java.awt.Dimension(64, 64));
         jLabel2.setRequestFocusEnabled(false);
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 80, 80));
 
@@ -112,63 +106,30 @@ public class FRM_ListaReservaciones extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-            
+        DB_Reservaciones db_Reservaciones = new DB_Reservaciones();
+        ArrayList<Reservacion> extraerDatosAtracciones = db_Reservaciones.extraerDatosAtracciones();
+        DefaultTableModel modelPersona = (DefaultTableModel) jT_ListaReservaciones.getModel();
         
-        
-        //Crear nodos de la pila y de la cola en null al comienzo
-        nodoReservacion miReserva = null;
-        boolean vacioPrimeraVez = false;
-        //Repetir el pop de la pila hasta que el devuelva nulo
-        for (;;) {
-            //Meter miReserva lo que se guardó en la pila
-            miReserva = miPila.pop();
-
-            if (miReserva == null) {
-                vacioPrimeraVez = true;
-                break;
-            }
-
-            //Meter en colaReservas lo que se guardó en la cola
-            if (miPila == null && vacioPrimeraVez != true) {
-
-                JOptionPane.showMessageDialog(null, "No se ha reservado nada.");
-                break;
-            }
-            //Sacar los datos de la pila y mostrarlos En la tabla
-
-            //Creamos una varible de tipo tabla para agregar cosas.
-            if (vacioPrimeraVez != true) {
-                DefaultTableModel modelPersona = (DefaultTableModel) jT_ListaReservaciones.getModel();
-                String nombreReservacion = miReserva.getMiReservacion().getNombreReservacion();
-                int cantidadPersonas = miReserva.getMiReservacion().getCantidadPersonas();
-                String fechaHora = miReserva.getMiReservacion().getFechaHora();
-                float costoPersona = miReserva.getMiReservacion().getCostoPersona();
-                float costoTotal = miReserva.getMiReservacion().getCostoTotal();
-                float costoImpuestos = miReserva.getMiReservacion().getCostoImpuestos();
-
-                //Guardar en la cola todos los datos de la pila.
-                colaReservaciones.enCola(new nodoColaAnteriores(new Reservacion(nombreReservacion, cantidadPersonas, fechaHora, costoPersona, costoTotal, costoImpuestos)));
-                colaLlena = true;
-
-                //Agregar a la tabla los datos de la Pila
-                modelPersona.addRow(new Object[]{nombreReservacion, cantidadPersonas, fechaHora, costoPersona, costoTotal, costoImpuestos});
-            }
-
-        }
-
-        //Llamar al metodo que está en la base de datos para guardar las reservaciones hechas
-        //Si la cola vienen vacía es porque no hay ninguna reserva actualmente, por lo que no se manda a guardar nada.
-        if (colaReservaciones != null && colaLlena == true) {
-
-            DB_Reservaciones db_Reservaciones = new DB_Reservaciones();
-            db_Reservaciones.crearReservacion(colaReservaciones);
-            JOptionPane.showMessageDialog(null, "Todas las reservaciones han sido descargadas a la base de datos.");
-        } else {
-            JOptionPane.showMessageDialog(null, "No hay datos en la cola para mandar a guardar a la base de datos");
-        }
-
+        //Rellenar la tabla recursivamente
+        cargarDatosRecursivamente(extraerDatosAtracciones,0,modelPersona);
 
     }//GEN-LAST:event_formWindowOpened
+
+    private void cargarDatosRecursivamente(ArrayList<Reservacion> extraerDatosAtracciones, int indice, DefaultTableModel modelPersona) {
+        if (indice < extraerDatosAtracciones.size()) {
+            Reservacion miReserva = extraerDatosAtracciones.get(indice);
+
+            String nombreReservacion = miReserva.getNombreReservacion();
+            int cantidadPersonas = miReserva.getCantidadPersonas();
+            String fechaHora = miReserva.getFechaHora();
+            float costoPersona = miReserva.getCostoPersona();
+            float costoTotal = miReserva.getCostoTotal();
+            float costoImpuestos = miReserva.getCostoImpuestos();
+            modelPersona.addRow(new Object[]{nombreReservacion, cantidadPersonas, fechaHora, costoPersona, costoTotal, costoImpuestos});
+            cargarDatosRecursivamente(extraerDatosAtracciones, indice + 1, modelPersona);
+        }
+    }
+
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
